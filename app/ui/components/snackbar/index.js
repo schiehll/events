@@ -16,7 +16,11 @@ class Snackbar extends Component {
     return(
       <SnackbarMUI
         open={this.state.snackbar.open}
-        message={i18n.t(this.state.snackbar.message)}
+        message={
+          this.state.snackbar.message 
+            ? i18n.t(this.state.snackbar.message)
+            : ''
+        }
         onRequestClose={this.handleSnackbarClose.bind(this)}
         autoHideDuration={5000}
         style={{textTransform: 'uppercase'}}

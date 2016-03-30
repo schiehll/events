@@ -1,37 +1,5 @@
-@lost flexbox flex;
+@import 'variables/colors';
 
-@value colors: "./colors.pcss";
-@value primary, bg from colors;
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: bg;
-  font-family: 'Roboto';
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.center {
-  lost-center: 980px;
-}
-
-.main {
-  composes: center;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-}
-
-:global .logo {
-  font-weight: bold;
-  font-size: 30px;
-  color: primary;
-}
+@import 'base';
+@import 'global';
+@import 'resets';

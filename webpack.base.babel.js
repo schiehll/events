@@ -2,6 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import autoprefixer from 'autoprefixer'
 import lost from 'lost'
+import partialImport from 'postcss-partial-import'
 import variables from 'postcss-modules-values'
 import fontMagician from 'postcss-font-magician'
 import precss from 'precss'
@@ -53,6 +54,10 @@ export default {
 
   postcss: function () {
     return [
+      partialImport({
+        extension: ['pcss'],
+        prefix: ''
+      }),
       autoprefixer,
       variables,
       precss,

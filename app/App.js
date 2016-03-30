@@ -1,5 +1,3 @@
-import styles from '+/assets/styles/app.pcss'
-import css from 'react-css-modules'
 import React, {PropTypes} from 'react'
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {loadingReducer} from 'redux-loading'
@@ -17,12 +15,11 @@ const store = createStore(
   applyMiddleware(...middleware)
 )
 
-@css(styles)
 class App extends React.Component {
   render() : Object {
     const {children} = this.props
     return(
-      <div styleName="main">
+      <div>
         <Helmet
         title={children.type.title || 'App'}
         titleTemplate={`${CONFIG.NAME} | %s`} />

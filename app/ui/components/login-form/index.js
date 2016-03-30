@@ -1,9 +1,8 @@
-import styles from '+/assets/styles/login.pcss'
+import styles from '+/assets/styles/components/login.pcss'
 import css from 'react-css-modules'
 import React from 'react'
 import Component from '+/core/Component'
 import i18n from '+/core/i18n'
-import Snackbar from '+/ui/components/snackbar'
 import {
   Paper, 
   TextField,
@@ -19,14 +18,8 @@ class LoginForm extends Component {
       email: this.userEmail.value,
       password: this.userPassword.value
     }))
-  }
 
-  handleSnackbarClose() : void {
-    const {dispatch, actions} = this.props
-    dispatch(actions.snackbar({
-      open: false,
-      message: null
-    }))
+    dispatch(actions.progress())
   }
 
   onRender() : Object {
@@ -58,7 +51,6 @@ class LoginForm extends Component {
             />
           </div>
         </Paper>
-        <Snackbar {...this.props} />
       </div>
     )
   }

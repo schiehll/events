@@ -7,7 +7,8 @@ const constants : string[] = [
   'LOGOUT',
   'SET_LANG',
   'GO_TO_ROUTE',
-  'SNACKBAR'
+  'SNACKBAR',
+  'PROGRESS'
 ]
 
 export default stringsToObject(constants)

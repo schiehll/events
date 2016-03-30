@@ -27,7 +27,7 @@ class View extends Component {
     this._checkAccess()
   }
 
-  componentUpdate() : void {
+  componentDidUpdate() : void {
     this._checkAccess()
   }
 

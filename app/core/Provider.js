@@ -1,6 +1,12 @@
+import 'react-progress-bar-plus/lib/progress-bar.css'
+import styles from '+/assets/styles/app.pcss'
+import css from 'react-css-modules'
 import React, {PropTypes} from 'react'
+import Snackbar from '+/ui/components/snackbar'
+import Progressbar from '+/ui/components/progressbar'
 
-export default class Provider extends React.Component {
+@css(styles)
+class Provider extends React.Component {
   render() : Object {
     const props = {
       store: this.props.store,
@@ -9,10 +15,18 @@ export default class Provider extends React.Component {
       actions: this.props.actions
     }
 
-    return React.cloneElement(this.props.children, {...props})
+    return(
+      <div styleName="main">
+        {React.cloneElement(this.props.children, {...props})}
+        <Snackbar {...props} />
+        <Progressbar {...props} />
+      </div>
+    ) 
   }
 }
 
 Provider.contextTypes = {
   routes: PropTypes.object
 }
+
+export default Provider
