@@ -1,0 +1,48 @@
+@value colors: "./colors.pcss";
+@value primary from colors;
+
+.center-all-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.pipe-before:before {
+  content: '';
+  height: 25px;
+  display: block;
+  float: left;
+  width: 5px;
+  background-color: primary;
+  margin-right: 15px;
+}
+
+.stacked {
+  overflow: visible;
+  &:before{
+    content: '';
+    width: 96%;
+    height: 13px;
+    position: relative;
+    -webkit-transition: none;
+    transition: none;
+    box-shadow: none;
+    opacity: 0.2;
+    top: -13px;
+    left: 2%;
+    background-color: primary;
+    border-radius: 2px 2px 0 0;
+    display: block;
+    float: left;
+  }
+}
+
+:global .pull-left {
+  float: left;
+}
+
+:global .pull-right {
+  float: right;
+}

@@ -1,0 +1,117 @@
+{
+  "name": "Events",
+  "version": "0.1.0",
+  "author": "Reinaldo Schiehll <rn.schiehll@gmail.com> (http://github.com/schiehll)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schiehll/events.git"
+  },
+  "scripts": {
+    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 nyc ava --no-cache",
+    "report": "nyc report --reporter=html",
+    "clean": "rimraf public/assets",
+    "build:prod": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack.prod.babel.js",
+    "build:local": "npm run clean && cross-env NODE_ENV=local webpack --config webpack.local.babel.js",
+    "build": "npm run build:local",
+    "postinstall": "npm run build:prod",
+    "local": "npm run build && cross-env NODE_ENV=local babel-node server.local.js"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.test.js"
+    ],
+    "require": [
+      "babel-register",
+      "./tests/__helpers__/setupBrowserEnv.js"
+    ],
+    "babel": "inherit"
+  },
+  "babel": {
+    "env": {
+      "local": {
+        "presets": [
+          "./preset.babel.js"
+        ]
+      },
+      "production": {
+        "presets": [
+          "./preset.babel.js"
+        ]
+      },
+      "test": {
+        "sourceMaps": "inline",
+        "presets": [
+          "./preset.babel.js"
+        ],
+        "plugins": [
+          [
+            "css-modules-transform",
+            {
+              "extensions": ".pcss"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "ava": "^0.13.0",
+    "babel-cli": "^6.6.5",
+    "babel-eslint": "^5.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-css-modules-transform": "0.0.7",
+    "babel-plugin-dot-dot-slash": "^1.0.0",
+    "babel-plugin-import-glob": "^1.0.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-typecheck": "^3.8.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.23.1",
+    "dotenv": "^2.0.0",
+    "enzyme": "^2.1.0",
+    "eslint": "^2.4.0",
+    "eslint-plugin-babel": "^3.1.0",
+    "eslint-plugin-react": "^4.2.1",
+    "exports-loader": "^0.6.3",
+    "express": "^4.13.4",
+    "express-history-api-fallback": "^2.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "imports-loader": "^0.6.5",
+    "jsdom": "^8.1.0",
+    "lost": "^6.7.2",
+    "nyc": "^6.1.1",
+    "postcss-font-magician": "^1.4.0",
+    "postcss-loader": "^0.8.2",
+    "postcss-modules-values": "^1.1.1",
+    "precss": "^1.4.0",
+    "promise-loader": "^1.0.0",
+    "react-addons-test-utils": "^0.14.7",
+    "react-css-modules": "^3.7.6",
+    "redbox-react": "^1.2.2",
+    "rimraf": "^2.5.2",
+    "serve-static": "^1.10.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.7.2",
+    "material-ui": "^0.14.4",
+    "micro-i18n": "^1.0.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-helmet": "^2.3.1",
+    "react-router": "^2.0.1",
+    "react-tap-event-plugin": "^0.2.2",
+    "redux": "^3.3.1",
+    "redux-loading": "^1.0.1",
+    "redux-thunk": "^2.0.1",
+    "whatwg-fetch": "^0.11.0"
+  }
+}
