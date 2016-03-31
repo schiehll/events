@@ -8,9 +8,7 @@ import i18n from '+/core/i18n'
 import {
   MenuItem,
   IconMenu,
-  FontIcon,
-  Tabs,
-  Tab
+  FontIcon
 } from 'material-ui'
 
 @css(styles)
@@ -30,19 +28,6 @@ class Header extends DumbComponent {
             </IconMenu>
           </div>
         </div>
-        <h1 styleName="title">{i18n.t(this.props.title)}</h1>
-        <Tabs styleName="tabs" tabItemContainerStyle={{width: 200}}>
-          <Tab label={i18n.t('TAB_LIST')} >
-            <div>
-              Listas
-            </div>
-          </Tab>
-          <Tab label={i18n.t('TAB_MAP')} >
-            <div>
-              Mapas
-            </div>
-          </Tab>
-        </Tabs>
       </div>
     )
   }

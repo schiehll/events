@@ -7,6 +7,7 @@ export default {
   PASSWORD: 'Senha',
   INVALID_CREDENTIALS: 'Credenciais inválidas',
   EVENT_LIST: 'Lista de eventos',
+  EVENT_MAP: 'Mapa de eventos',
   TAB_LIST: 'Lista',
   TAB_MAP: 'Mapa'
 }
