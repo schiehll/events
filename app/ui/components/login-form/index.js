@@ -16,8 +16,8 @@ class LoginForm extends Component {
   login() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.login({
-      email: this.userEmail.value,
-      password: this.userPassword.value
+      email: this.userEmail.refs.input.value,
+      password: this.userPassword.refs.input.value
     }))
 
     dispatch(actions.progress())

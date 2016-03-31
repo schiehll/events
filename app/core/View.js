@@ -7,10 +7,13 @@ class View extends Component {
   _tryToLoginWithToken() : void {
     const {store, actions, routes} = this.props
     const token = localStorage.getItem(`${CONFIG.STORAGE_KEY}.jwt`)
-    if(token) {
+    console.log('tokens', token);
+    if(token !== null) {
+      console.log('nooo');
       store.dispatch(actions.loginWithToken())
     }
     else{
+      console.log('ueh');
       store.dispatch(actions.goTo(routes.login))
     }
   }
@@ -24,10 +27,6 @@ class View extends Component {
   }
 
   componentWillMount() : void {
-    this._checkAccess()
-  }
-
-  componentDidUpdate() : void {
     this._checkAccess()
   }
 

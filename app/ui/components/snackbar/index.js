@@ -13,12 +13,14 @@ class Snackbar extends Component {
   }
 
   onRender() : Object {
+    const {snackbar} = this.state
+    console.log('snackbar', snackbar);
     return(
       <SnackbarMUI
-        open={this.state.snackbar.open}
+        open={snackbar.open}
         message={
-          this.state.snackbar.message 
-            ? i18n.t(this.state.snackbar.message)
+          snackbar.message 
+            ? i18n.t(snackbar.message)
             : ''
         }
         onRequestClose={this.handleSnackbarClose.bind(this)}

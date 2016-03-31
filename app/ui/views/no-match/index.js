@@ -7,7 +7,7 @@ import i18n from '+/core/i18n'
   name: 'nomatch',
   path: '*'
 })
-@title('No Match')
+@title(i18n.t('NO_MATCH'))
 class NoMatch extends View {
   handleBtnClick() : void {
     const {dispatch, actions, routes} = this.props
