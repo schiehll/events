@@ -18,7 +18,6 @@ class Component extends React.Component {
 
   render() : Object {
     this.state = this.props.store.getState()
-
     return this.onRender()
   }
 }

@@ -6,11 +6,18 @@ class Progressbar extends Component {
   componentDidUpdate() : void {
     const {dispatch, actions} = this.props
     const {loading, progress} = this.state
-    if(progress.percent > -1 && progress.percent < 100 && loading.done){
+    if(progress.percent === 1 && loading.done){
       dispatch(actions.progress({
         percent: 100,
         increment: false 
       }))
+
+      setTimeout(() => {
+        dispatch(actions.progress({
+          percent: -1,
+          increment: false 
+        }))
+      }, 1000)
     }
   }
 

@@ -9,5 +9,6 @@ export default {
   EVENT_LIST: 'Lista de eventos',
   EVENT_MAP: 'Mapa de eventos',
   TAB_LIST: 'Lista',
-  TAB_MAP: 'Mapa'
+  TAB_MAP: 'Mapa',
+  SHOWING_THE_NEXT: 'Mostrando os próximos'
 }

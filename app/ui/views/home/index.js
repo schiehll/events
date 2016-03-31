@@ -5,6 +5,7 @@ import View from '+/core/View'
 import {route, title, restricted} from '+/utils/decorators'
 import Header from '+/ui/components/header'
 import i18n from '+/core/i18n'
+import EventCard from '+/ui/components/event-card'
 import {
   Tabs,
   Tab
@@ -37,21 +38,20 @@ class Home extends View {
           onLogout={this.logout.bind(this)}
         />
         <h1 styleName="title">{i18n.t(tab)}</h1>
+        <h2 styleName="subtitle">{i18n.t('SHOWING_THE_NEXT')}</h2>
         <Tabs styleName="tabs" tabItemContainerStyle={{width: 200}}>
           <Tab 
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
           >
-            <div>
-              Listas
-            </div>
+            <EventCard />
           </Tab>
           <Tab 
             label={i18n.t('TAB_MAP')} 
             onActive={this.handleTabs.bind(this, 'EVENT_MAP')}
           >
             <div>
-              Mapas
+              Map
             </div>
           </Tab>
         </Tabs>
