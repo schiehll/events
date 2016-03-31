@@ -14,7 +14,6 @@ class Snackbar extends Component {
 
   onRender() : Object {
     const {snackbar} = this.state
-    console.log('snackbar', snackbar);
     return(
       <SnackbarMUI
         open={snackbar.open}

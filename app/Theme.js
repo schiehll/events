@@ -6,7 +6,7 @@ import colors from '+/assets/styles/variables/colors.pcss'
 export default {
   spacing: Spacing,
   zIndex: zIndex,
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: 'Roboto',
   palette: {
     primary1Color: colors.primary,
     primary2Color: colors.darkPrimary,

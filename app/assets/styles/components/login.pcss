@@ -1,12 +1,12 @@
 @import '../variables/colors';
 
 .login {
-  composes: center-all-children from '../helpers.pcss';
+  composes: center-all-children from '../helpers/modifiers.pcss';
   flex-direction: column;
 }
 
 .form {
-  composes: stacked from '../helpers.pcss';
+  composes: stacked from '../helpers/modifiers.pcss';
   padding: 0;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .title {
-  composes: pipe-before from '../helpers.pcss';
+  composes: pipe-before from '../helpers/modifiers.pcss';
   padding: 20px 0 0;
   text-transform: uppercase;
   font-weight: bold;

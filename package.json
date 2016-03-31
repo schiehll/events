@@ -112,7 +112,7 @@
     "react-router": "^2.0.1",
     "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.3.1",
-    "redux-loading": "^1.0.1",
+    "redux-loading": "^1.0.2",
     "redux-thunk": "^2.0.1",
     "whatwg-fetch": "^0.11.0"
   }
