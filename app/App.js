@@ -6,6 +6,9 @@ import * as actions from 'glob:./actions/*.js'
 import middleware from '+/config/middleware'
 import Provider from '+/core/Provider'
 import Helmet from 'react-helmet'
+import Theme from '+/Theme'
+import ThemeManager from 'material-ui/lib/styles/theme-manager'
+import theme from 'material-ui/lib/styles/theme-decorator'
 
 const store = createStore(
   combineReducers({
@@ -15,6 +18,7 @@ const store = createStore(
   applyMiddleware(...middleware)
 )
 
+@theme(ThemeManager.getMuiTheme(Theme))
 class App extends React.Component {
   render() : Object {
     const {children} = this.props

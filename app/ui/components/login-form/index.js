@@ -3,6 +3,7 @@ import css from 'react-css-modules'
 import React from 'react'
 import Component from '+/core/Component'
 import i18n from '+/core/i18n'
+import Logo from '+/ui/components/logo'
 import {
   Paper, 
   TextField,
@@ -25,8 +26,8 @@ class LoginForm extends Component {
   onRender() : Object {
     return(
       <div styleName="login">
-        <div className="logo" styleName="logo">
-          <FontIcon className="material-icons pull-left" color={styles.primary}>local_bar</FontIcon> events
+        <div styleName="logo">
+          <Logo />
         </div>
         <Paper styleName="form">
           <div styleName="title">{i18n.t('LOGIN')}</div>
