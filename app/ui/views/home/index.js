@@ -24,6 +24,7 @@ class Home extends View {
         <Header 
           user={this.state.auth.user} 
           onLogout={this.logout.bind(this)}
+          title="EVENT_LIST"
         />
       </div>
     )

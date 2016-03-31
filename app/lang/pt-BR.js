@@ -5,5 +5,8 @@ export default {
   ENTER: 'Entrar',
   EMAIL: 'Email',
   PASSWORD: 'Senha',
-  INVALID_CREDENTIALS: 'Credenciais inválidas'
+  INVALID_CREDENTIALS: 'Credenciais inválidas',
+  EVENT_LIST: 'Lista de eventos',
+  TAB_LIST: 'Lista',
+  TAB_MAP: 'Mapa'
 }
