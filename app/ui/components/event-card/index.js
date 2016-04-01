@@ -15,6 +15,10 @@ import {
 } from 'material-ui'
 
 class EventCard extends DumbComponent {
+  handleTagClick(tag : string) : void {
+    this.props.onTagClickHandler(tag)
+  }
+
   onRender() : Object {
     const {event, user, tags, auth} = this.props
     return(
@@ -26,7 +30,7 @@ class EventCard extends DumbComponent {
         <CardMedia overlay={
           <CardTitle title={event.address} subtitle={
             <For each="tag" index="i" of={tags}>
-              <span className={styles.tag} key={i}>{`#${tag.name}`}</span>
+              <span onClick={this.handleTagClick.bind(this, tag.name)} className={styles.tag} key={i}>{`#${tag.name}`}</span>
             </For>
           } />
         } >

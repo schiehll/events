@@ -51,9 +51,9 @@ class EventMap extends Component {
     return(
       <Card className={styles.map}>
         <CardHeader title={i18n.t('CLICK_ON_MARKS_TO_INFOS')} />
-        <CardMedia className={styles.googlemap}>
+        <CardMedia>
           <GoogleMapLoader
-            containerElement={<div className={styles.maploader} />}
+            containerElement={<div className={styles.googlemap} />}
             googleMapElement={
               <GoogleMap
                 defaultZoom={12}

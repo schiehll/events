@@ -1,3 +1,5 @@
+@import '../variables/sizes';
+
 .map {
   composes: center from '../base.pcss';
   margin-top: 30px;
@@ -8,16 +10,5 @@
 }
 
 .googlemap {
-  height: 500px !important;
-  width: 100%;
-}
-
-.googlemap > div {
-  height: inherit;
-  width: inherit;
-}
-
-.maploader {
-  height: 600px;
-  width: 100%;
+  height: mapHeight;
 }

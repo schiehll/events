@@ -7,7 +7,7 @@ import {getLatLng} from '+/utils/maps'
 
 class EventList extends DumbComponent {
   loadEvents() : void {
-    const {dispatch, actions, events, map} = this.props
+    const {dispatch, actions, events} = this.props
     const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
     if(!events.events){
       dispatch(actions.query(`
@@ -45,6 +45,31 @@ class EventList extends DumbComponent {
     }
   }
 
+  fiterByTag(tag : string) : void {
+    const {dispatch, actions, onTagFilterHandler} = this.props
+    const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
+    dispatch(actions.query(`
+      events(tag: "${tag}"){
+        event{
+          id
+          name
+          date
+          address
+          image
+        }
+        user{
+          id
+          name
+        }
+        tags{
+          name
+        }
+      }
+    `, [EVENTS_SUCCESS, EVENTS_ERROR]))
+
+    onTagFilterHandler(tag)
+  }
+
   onRender() : Object {
     this.loadEvents()
     const {auth, events} = this.props
@@ -53,7 +78,7 @@ class EventList extends DumbComponent {
       <div className={styles.list}>
         <For each="event" index="i" of={events.events || []}>
           <div key={i} className={styles.event}>
-            <EventCard {...event} auth={auth}/>
+            <EventCard {...event} auth={auth} onTagClickHandler={this.fiterByTag.bind(this)}/>
           </div>
         </For>
       </div>
