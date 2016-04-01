@@ -20,7 +20,7 @@ class EventMap extends Component {
     let markers = []
     const {events, map} = this.state
 
-    let center = {lat: -30.0418885, lng: -51.2211067}
+    const bounds = new google.maps.LatLngBounds()
     if(events.events && events.events[0].event.hasOwnProperty('lat')){
       events.events.forEach((e, index) => {
         const {event} = e
@@ -43,10 +43,12 @@ class EventMap extends Component {
 
         if(!exist){
           markers.push(marker)
-          center = marker.position
+          bounds.extend(new google.maps.LatLng(marker.position.lat, marker.position.lng))
         }
       })
     }
+
+    const center = bounds.getCenter()
 
     return(
       <Card className={styles.map}>
@@ -56,8 +58,8 @@ class EventMap extends Component {
             containerElement={<div className={styles.googlemap} />}
             googleMapElement={
               <GoogleMap
-                defaultZoom={12}
-                defaultCenter={center}
+                defaultZoom={6}
+                center={{lat: center.lat(), lng: center.lng()}}
                 options={{disableDefaultUI: true}}
               >
               {markers.map((marker, index) => {
