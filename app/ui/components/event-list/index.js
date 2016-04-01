@@ -1,117 +1,49 @@
 import styles from '+/assets/styles/components/event-list.pcss'
 import React from 'react'
-import Component from '+/core/Component'
+import DumbComponent from '+/core/DumbComponent'
 import EventCard from '+/ui/components/event-card'
+import constants from '+/config/constants'
 
-class EventList extends Component {
+class EventList extends DumbComponent {
+  loadEvents() : void {
+    const {dispatch, actions, events} = this.props
+    if(!events.events){
+      const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
+      dispatch(actions.query(`
+        events{
+          event{
+            id
+            name
+            date
+            address
+            image
+          }
+          user{
+            id
+            name
+          }
+          tags{
+            name
+          }
+        }
+      `, [EVENTS_SUCCESS, EVENTS_ERROR]))
+    }
+  }
+
   onRender() : Object {
+    this.loadEvents()
+    const {auth, events} = this.props
+
     return(
       <div className={styles.list}>
-        <For each="event" index="i" of={this.props.events}>
+        <For each="event" index="i" of={events.events || []}>
           <div key={i} className={styles.event}>
-            <EventCard {...event} auth={this.state.auth}/>
+            <EventCard {...event} auth={auth}/>
           </div>
         </For>
       </div>
     )
   }
-}
-
-EventList.defaultProps = {
-  events: [
-    {
-      event: {
-        name: 'Some Event Name',
-        address: 'Rua Luiz Pasteur, 45 - São Leopoldo - RS',
-        date: '10/04/2016 - 23:30',
-        image: 'http://lorempixel.com/300/300/nightlife/'
-      },
-      user: {
-        id: 1,
-        name: 'userX'
-      },
-      tags: [
-        {
-          name: 'rock n roll'
-        },
-        {
-          name: 'heavy metal'
-        },
-        {
-          name: 'rock'
-        },
-        {
-          name: 'punk'
-        },
-        {
-          name: 'hard rock'
-        },
-        {
-          name: 'grunge'
-        }
-      ]
-    },
-    {
-      event: {
-        name: 'Some Event Name',
-        address: 'Rua Luiz Pasteur, 45 - São Leopoldo - RS',
-        date: '10/04/2016 - 23:30',
-        image: 'http://lorempixel.com/600/600/nightlife/'
-      },
-      user: {
-        id: 2,
-        name: 'userX'
-      },
-      tags: [
-        {
-          name: 'rock n roll'
-        },
-        {
-          name: 'heavy metal'
-        }
-      ]
-    },
-    {
-      event: {
-        name: 'Some Event Name',
-        address: 'Rua Luiz Pasteur, 45 - São Leopoldo - RS',
-        date: '10/04/2016 - 23:30',
-        image: 'http://lorempixel.com/300/300/nightlife/'
-      },
-      user: {
-        id: 3,
-        name: 'userX'
-      },
-      tags: [
-        {
-          name: 'rock n roll'
-        },
-        {
-          name: 'heavy metal'
-        }
-      ]
-    },
-    {
-      event: {
-        name: 'Some Event Name',
-        address: 'Rua Luiz Pasteur, 45 - São Leopoldo - RS',
-        date: '10/04/2016 - 23:30',
-        image: 'http://lorempixel.com/600/600/nightlife/'
-      },
-      user: {
-        id: 1,
-        name: 'userX'
-      },
-      tags: [
-        {
-          name: 'rock n roll'
-        },
-        {
-          name: 'heavy metal'
-        }
-      ]
-    }
-  ]
 }
 
 export default EventList

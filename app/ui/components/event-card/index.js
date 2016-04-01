@@ -40,7 +40,7 @@ class EventCard extends DumbComponent {
                   <IconMenu 
                     targetOrigin={{vertical: 'bottom', horizontal: 'right'}} 
                     className={styles.actions} 
-                    iconButtonElement={<FontIcon color={colors.text} className="material-icons">more_vert</FontIcon>}
+                    iconButtonElement={<FontIcon color={colors.secondaryText} className="material-icons">more_vert</FontIcon>}
                   >
                     <MenuItem 
                       primaryText="editar"

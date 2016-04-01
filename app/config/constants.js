@@ -9,7 +9,9 @@ const constants : string[] = [
   'GO_TO_ROUTE',
   'SNACKBAR',
   'PROGRESS',
-  'CHANGE_TAB'
+  'CHANGE_TAB',
+  'EVENTS_SUCCESS',
+  'EVENTS_ERROR'
 ]
 
 export default stringsToObject(constants)

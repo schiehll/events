@@ -28,7 +28,7 @@ class Home extends View {
   }
 
   onRender() : Object {
-    const {auth, tab} = this.state
+    const {auth, tab, events} = this.state
     return(
       <div className={styles.main}>
         <Header 
@@ -42,7 +42,7 @@ class Home extends View {
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
           >
-            <EventList {...this.props} />
+            <EventList {...this.props} events={events} auth={auth} />
           </Tab>
           <Tab 
             label={i18n.t('TAB_MAP')} 
