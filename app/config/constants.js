@@ -10,6 +10,7 @@ const constants : string[] = [
   'SNACKBAR',
   'PROGRESS',
   'CHANGE_TAB',
+  'CHANGE_SUBTITLE',
   'EVENTS_SUCCESS',
   'EVENTS_ERROR',
   'SHOW_EVENT_INFO'

@@ -7,7 +7,6 @@ import Header from '+/ui/components/header'
 import i18n from '+/core/i18n'
 import EventList from '+/ui/components/event-list'
 import EventMap from '+/ui/components/event-map'
-import constants from '+/config/constants'
 import {
   Tabs,
   Tab,
@@ -38,44 +37,19 @@ class Home extends View {
 
   handleTagFilter(tag : string) : void {
     const {dispatch, actions} = this.props
-    dispatch({
-      type: 'CHANGE_SUBTITLE',
-      payload: {
-        key: 'FILTERED_BY',
-        filter: tag
-      }
-    })
+    dispatch(actions.changeSubtitle({
+      key: 'FILTERED_BY',
+      filter: tag
+    }))
   }
 
   clearFilter() : void {
     const {dispatch, actions} = this.props
-    const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
-    dispatch(actions.query(`
-      events{
-        event{
-          id
-          name
-          date
-          address
-          image
-        }
-        user{
-          id
-          name
-        }
-        tags{
-          name
-        }
-      }
-    `, [EVENTS_SUCCESS, EVENTS_ERROR]))
-
-    dispatch({
-      type: 'CHANGE_SUBTITLE',
-      payload: {
-        key: 'SHOWING_ALL',
-        filter: null
-      }
-    })
+    dispatch(actions.getEvents())
+    dispatch(actions.changeSubtitle({
+      key: 'SHOWING_ALL',
+      filter: null
+    }))
   }
 
   onRender() : Object {

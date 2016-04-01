@@ -8,26 +8,10 @@ import {getLatLng} from '+/utils/maps'
 class EventList extends DumbComponent {
   loadEvents() : void {
     const {dispatch, actions, events} = this.props
-    const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
+    const {EVENTS_SUCCESS} = constants
+    
     if(!events.events){
-      dispatch(actions.query(`
-        events{
-          event{
-            id
-            name
-            date
-            address
-            image
-          }
-          user{
-            id
-            name
-          }
-          tags{
-            name
-          }
-        }
-      `, [EVENTS_SUCCESS, EVENTS_ERROR]))
+      dispatch(actions.getEvents())
     }
     else if(!events.events[0].event.hasOwnProperty('lat')){
       const eventsPromises = events.events.map(event => {
@@ -47,26 +31,7 @@ class EventList extends DumbComponent {
 
   fiterByTag(tag : string) : void {
     const {dispatch, actions, onTagFilterHandler} = this.props
-    const {EVENTS_SUCCESS, EVENTS_ERROR} = constants
-    dispatch(actions.query(`
-      events(tag: "${tag}"){
-        event{
-          id
-          name
-          date
-          address
-          image
-        }
-        user{
-          id
-          name
-        }
-        tags{
-          name
-        }
-      }
-    `, [EVENTS_SUCCESS, EVENTS_ERROR]))
-
+    dispatch(actions.getEvents(tag))
     onTagFilterHandler(tag)
   }
 
