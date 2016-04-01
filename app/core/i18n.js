@@ -10,6 +10,7 @@ class I18n {
   }
 
   loadLangData(locale : string) : Function {
+    this.locale = locale
     return require(`promise?global,./lang/[name]!babel!../lang/${locale}.js`)
   }
 }
