@@ -105,10 +105,12 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.2",
+    "lodash": "^4.7.0",
     "material-ui": "^0.14.4",
     "micro-i18n": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-google-maps": "^4.9.1",
     "react-helmet": "^2.3.1",
     "react-progress-bar-plus": "^0.2.3",
     "react-router": "^2.0.1",

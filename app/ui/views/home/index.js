@@ -5,6 +5,7 @@ import {route, title, restricted} from '+/utils/decorators'
 import Header from '+/ui/components/header'
 import i18n from '+/core/i18n'
 import EventList from '+/ui/components/event-list'
+import EventMap from '+/ui/components/event-map'
 import {
   Tabs,
   Tab
@@ -17,6 +18,11 @@ import {
 @title('Home')
 @restricted
 class Home extends View {
+  constructor(props) {
+    super(props)
+    this.maps = null
+  }
+
   logout() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.logout())
@@ -48,9 +54,7 @@ class Home extends View {
             label={i18n.t('TAB_MAP')} 
             onActive={this.handleTabs.bind(this, 'EVENT_MAP')}
           >
-            <div>
-              Map
-            </div>
+            <EventMap {...this.props}/>
           </Tab>
         </Tabs>
       </div>

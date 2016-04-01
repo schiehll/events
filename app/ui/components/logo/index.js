@@ -1,7 +1,7 @@
+import colors from '+/assets/styles/variables/colors.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
 import {FontIcon} from 'material-ui'
-import colors from '+/assets/styles/variables/colors.pcss'
 
 class Logo extends DumbComponent {
   onRender() : Object {
