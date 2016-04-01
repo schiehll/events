@@ -2,7 +2,7 @@ import styles from '+/assets/styles/components/event-card.pcss'
 import colors from '+/assets/styles/variables/colors.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
-import i18n from '+/core/i18n'
+import {formatDate} from '+/utils/date'
 import {
   Card,
   CardHeader,
@@ -15,16 +15,6 @@ import {
 } from 'material-ui'
 
 class EventCard extends DumbComponent {
-  formatDate(date : string) : string {
-    const options = {
-      year: 'numeric', month: 'numeric', day: 'numeric',
-      hour: 'numeric', minute: 'numeric',
-      hour12: false
-    }
-    const formatedDate = new Intl.DateTimeFormat(i18n.locale, options).format(new Date(date))
-    return formatedDate.replace(' ', ' - ')
-  }
-
   onRender() : Object {
     const {event, user, tags, auth} = this.props
     return(
@@ -46,7 +36,7 @@ class EventCard extends DumbComponent {
           <CardTitle
             subtitle={
               <span>
-                <FontIcon className={`material-icons ${styles.date}`} color={colors.secondaryText}>today</FontIcon> {this.formatDate(event.date)}
+                <FontIcon className={`material-icons ${styles.date}`} color={colors.secondaryText}>today</FontIcon> {formatDate(event.date)}
                 <If condition={parseInt(user.id) === parseInt(auth.user.id)}>
                   <IconMenu 
                     targetOrigin={{vertical: 'bottom', horizontal: 'right'}} 

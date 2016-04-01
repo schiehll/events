@@ -105,7 +105,6 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.2",
-    "lodash": "^4.7.0",
     "material-ui": "^0.14.4",
     "micro-i18n": "^1.0.0",
     "react": "^0.14.7",

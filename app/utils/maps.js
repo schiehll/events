@@ -5,7 +5,6 @@ export const getLatLng = (e : Object) : Promise => {
     fetch(url).then(response => {
       return response.json()
     }).then(response => {
-      console.log('response api', response);
       if(response.status === 'OK'){
         resolve({
           ...e,

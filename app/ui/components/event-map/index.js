@@ -7,29 +7,41 @@ import {
   CardMedia
 } from 'material-ui'
 import {GoogleMapLoader, GoogleMap, Marker, InfoWindow} from 'react-google-maps'
-import _ from 'lodash'
+import EventInfoWindow from '+/ui/components/event-info-window'
+import i18n from '+/core/i18n'
 
 class EventMap extends Component {
-  handleEventClick(event) : void {
+  openEventInfo(event : Object) : void {
     const {dispatch, actions} = this.props
-    dispatch(actions.toggleEventInfo(event))
+    dispatch(actions.openEventInfo(event))
   }
 
   onRender() : Object {
     let markers = []
-    const {events} = this.state
+    const {events, map} = this.state
+
     let center = {lat: -30.0418885, lng: -51.2211067}
     if(events.events && events.events[0].event.hasOwnProperty('lat')){
-      events.events.forEach(e => {
+      events.events.forEach((e, index) => {
         const {event} = e
         const marker = {
+          event: event,
           position: {
             lat: event.lat, 
             lng: event.lng
           }
         }
 
-        if(_.filter(markers, _.matches(marker)).length === 0){
+        let exist = false
+        markers.forEach(mark => {
+          if(mark.position.lat === marker.position.lat 
+            && mark.position.lng === marker.position.lng){
+            exist = true
+            return
+          }
+        })
+
+        if(!exist){
           markers.push(marker)
           center = marker.position
         }
@@ -38,7 +50,7 @@ class EventMap extends Component {
 
     return(
       <Card className={styles.map}>
-        <CardHeader title={'CLICK_ON_MARKS_TO_INFOS'} />
+        <CardHeader title={i18n.t('CLICK_ON_MARKS_TO_INFOS')} />
         <CardMedia className={styles.googlemap}>
           <GoogleMapLoader
             containerElement={<div className={styles.maploader} />}
@@ -50,7 +62,17 @@ class EventMap extends Component {
               >
               {markers.map((marker, index) => {
                 return(
-                  <Marker key={index} {...marker} />
+                  <Marker 
+                    key={index} 
+                    position={marker.position}
+                    onClick={this.openEventInfo.bind(this, marker.event)}
+                  >
+                    <If condition={map.event.hasOwnProperty('id') && map.event.id === marker.event.id}>
+                      <InfoWindow>
+                        <EventInfoWindow {...marker.event} />
+                      </InfoWindow>
+                    </If>
+                  </Marker>
                 )
               })}
               </GoogleMap>

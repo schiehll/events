@@ -11,7 +11,8 @@ const constants : string[] = [
   'PROGRESS',
   'CHANGE_TAB',
   'EVENTS_SUCCESS',
-  'EVENTS_ERROR'
+  'EVENTS_ERROR',
+  'SHOW_EVENT_INFO'
 ]
 
 export default stringsToObject(constants)
