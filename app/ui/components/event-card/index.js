@@ -1,3 +1,5 @@
+import styles from '+/assets/styles/components/event-card.pcss'
+import colors from '+/assets/styles/variables/colors.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
 import {
@@ -6,24 +8,51 @@ import {
   CardMedia,
   CardTitle,
   CardActions,
-  FlatButton
+  FontIcon,
+  IconMenu,
+  MenuItem
 } from 'material-ui'
 
 class EventCard extends DumbComponent {
   onRender() : Object {
+    const {event, user, tags, auth} = this.props
     return(
       <Card>
         <CardHeader
-          title="Event Name"
-          subtitle="@uername"
+          title={event.name}
+          subtitle={`@${user.name}`}
         />
-        <CardMedia
-          overlay={<CardTitle title="Rua Luiz Pasteur, 45 - São Leopoldo - RS" subtitle="04/10/2016 - 23:30" />}
-        >
-          <img src="http://lorempixel.com/300/300/nightlife/" />
+        <CardMedia overlay={
+          <CardTitle title={event.address} subtitle={
+            <For each="tag" index="i" of={tags}>
+              <span className={styles.tag} key={i}>{`#${tag.name}`}</span>
+            </For>
+          } />
+        } >
+          <img src={event.image} />
         </CardMedia>
         <CardActions>
-          <FlatButton label="Tag 1" />
+          <CardTitle
+            subtitle={
+              <span>
+                <FontIcon className={`material-icons ${styles.date}`} color={colors.secondaryText}>today</FontIcon> {event.date}
+                <If condition={parseInt(user.id) === parseInt(auth.user.id)}>
+                  <IconMenu 
+                    targetOrigin={{vertical: 'bottom', horizontal: 'right'}} 
+                    className={styles.actions} 
+                    iconButtonElement={<FontIcon color={colors.text} className="material-icons">more_vert</FontIcon>}
+                  >
+                    <MenuItem 
+                      primaryText="editar"
+                    />
+                    <MenuItem 
+                      primaryText="excluir"
+                    />
+                  </IconMenu>
+                </If>
+              </span>
+            }
+          />
         </CardActions>
       </Card>
     )

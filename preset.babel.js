@@ -6,6 +6,7 @@ module.exports = {
   ],
   plugins: [
     require('babel-plugin-transform-decorators-legacy').default,
+    require('jsx-control-statements'),
     require('babel-plugin-import-glob').default,
     [require('babel-plugin-typecheck').default, { 
       disable: {

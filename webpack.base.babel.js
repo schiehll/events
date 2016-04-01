@@ -6,6 +6,8 @@ import partialImport from 'postcss-partial-import'
 import variables from 'postcss-modules-values'
 import fontMagician from 'postcss-font-magician'
 import precss from 'precss'
+import minmax from 'postcss-media-minmax'
+import ifMedia from 'postcss-if-media'
 import config from '+/config/app'
 
 export default {
@@ -58,6 +60,8 @@ export default {
         extension: ['pcss'],
         prefix: ''
       }),
+      ifMedia,
+      minmax,
       autoprefixer,
       variables,
       precss,

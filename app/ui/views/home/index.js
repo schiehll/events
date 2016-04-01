@@ -1,11 +1,10 @@
 import styles from '+/assets/styles/components/home.pcss'
-import css from 'react-css-modules'
 import React from 'react'
 import View from '+/core/View'
 import {route, title, restricted} from '+/utils/decorators'
 import Header from '+/ui/components/header'
 import i18n from '+/core/i18n'
-import EventCard from '+/ui/components/event-card'
+import EventList from '+/ui/components/event-list'
 import {
   Tabs,
   Tab
@@ -17,7 +16,6 @@ import {
 })
 @title('Home')
 @restricted
-@css(styles)
 class Home extends View {
   logout() : void {
     const {dispatch, actions} = this.props
@@ -32,19 +30,19 @@ class Home extends View {
   onRender() : Object {
     const {auth, tab} = this.state
     return(
-      <div styleName="main">
+      <div className={styles.main}>
         <Header 
           user={auth.user} 
           onLogout={this.logout.bind(this)}
         />
-        <h1 styleName="title">{i18n.t(tab)}</h1>
-        <h2 styleName="subtitle">{i18n.t('SHOWING_THE_NEXT')}</h2>
-        <Tabs styleName="tabs" tabItemContainerStyle={{width: 200}}>
+        <h2 className={styles.title}>{i18n.t(tab)}</h2>
+        <h3 className={styles.subtitle}>{i18n.t('SHOWING_THE_NEXT')}</h3>
+        <Tabs className={styles.tabs} tabItemContainerStyle={{width: 200}}>
           <Tab 
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
           >
-            <EventCard />
+            <EventList {...this.props} />
           </Tab>
           <Tab 
             label={i18n.t('TAB_MAP')} 

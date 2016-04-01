@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import OverrideError from '+/errors/OverrideError'
 
 class Component extends React.Component {

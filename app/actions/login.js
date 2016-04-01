@@ -14,9 +14,6 @@ const login = (user : Object) : Function => {
       }
     })
 
-    setTimeout(() => {
-
-
     Auth.login(user).then(response => {
       if(!response.hasOwnProperty('errors')){
         localStorage.setItem(`${CONFIG.STORAGE_KEY}.jwt`, response.data.auth.token)
@@ -76,7 +73,6 @@ const login = (user : Object) : Function => {
           }
         })
     })
-    }, 2000)
   }
 }
 

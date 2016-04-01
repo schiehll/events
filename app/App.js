@@ -1,6 +1,5 @@
 import styles from '+/assets/styles/header.pcss'
-import css from 'react-css-modules'
-import React, {PropTypes} from 'react'
+import React from 'react'
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {loadingReducer} from 'redux-loading'
 import * as reducers from 'glob:./reducers/*.js'
@@ -21,16 +20,15 @@ const store = createStore(
 )
 
 @theme(ThemeManager.getMuiTheme(Theme))
-@css(styles)
 class App extends React.Component {
   render() : Object {
     const {children, location} = this.props
-    let styleName = 'app'
+    let className = styles.app
     if(location.pathname.includes('login')){
-      styleName = 'login'
+      className = styles.login
     }
     return(
-      <div styleName={styleName}>
+      <div className={className}>
         <Helmet
         title={children.type.title || 'App'}
         titleTemplate={`${CONFIG.NAME} | %s`} />

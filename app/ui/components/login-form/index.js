@@ -1,5 +1,4 @@
 import styles from '+/assets/styles/components/login.pcss'
-import css from 'react-css-modules'
 import React from 'react'
 import Component from '+/core/Component'
 import i18n from '+/core/i18n'
@@ -11,7 +10,6 @@ import {
   FontIcon
 } from 'material-ui'
 
-@css(styles)
 class LoginForm extends Component {
   login() : void {
     const {dispatch, actions} = this.props
@@ -25,13 +23,13 @@ class LoginForm extends Component {
 
   onRender() : Object {
     return(
-      <div styleName="login">
-        <div styleName="logo">
+      <div className={styles.login}>
+        <div className={styles.logo}>
           <Logo />
         </div>
-        <Paper styleName="form">
-          <div styleName="title">{i18n.t('LOGIN')}</div>
-          <div styleName="fields">
+        <Paper className={styles.form}>
+          <div className={styles.title}>{i18n.t('LOGIN')}</div>
+          <div className={styles.fields}>
             <TextField
               type="email"
               ref={i => this.userEmail = i}
