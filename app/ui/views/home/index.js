@@ -12,7 +12,8 @@ import {
   Tabs,
   Tab,
   FontIcon,
-  FloatingActionButton
+  FloatingActionButton,
+  LeftNav
 } from 'material-ui'
 
 @route({
@@ -67,8 +68,19 @@ class Home extends View {
     return <span>{i18n.t(subtitle.key)}</span>
   }
 
+  toggleForm() : void {
+    const {form} = this.state
+    const {dispatch} = this.props
+    dispatch({
+      type: 'TOGGLE_FORM',
+      payload: {
+        open: !form.open
+      }
+    })
+  }
+
   onRender() : Object {
-    const {auth, tab} = this.state
+    const {auth, tab, form} = this.state
     return(
       <div className={styles.main}>
         <Header 
@@ -77,7 +89,7 @@ class Home extends View {
         />
         <h2 className={styles.title}>{i18n.t(tab)}</h2>
         <h3 className={styles.subtitle}>{this.showSubtitle.bind(this)()}</h3>
-        <div className={styles.fab} onClick={() => console.log('faab')}>
+        <div className={styles.fab} onClick={this.toggleForm.bind(this)}>
           <FloatingActionButton>
             <FontIcon
               color={colors.alternateText} 
@@ -103,6 +115,13 @@ class Home extends View {
             <EventMap {...this.props}/>
           </Tab>
         </Tabs>
+        <LeftNav 
+          width={sizes.formWidth}
+          docked={false} 
+          open={form.open}
+        >
+          Ha
+        </LeftNav>
       </div>
     )
   }
