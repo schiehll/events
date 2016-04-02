@@ -20,11 +20,6 @@ import {
 @title('Home')
 @restricted
 class Home extends View {
-  constructor(props) {
-    super(props)
-    this.maps = null
-  }
-
   logout() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.logout())
