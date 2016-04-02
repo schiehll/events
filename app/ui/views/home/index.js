@@ -8,6 +8,7 @@ import Header from '+/ui/components/header'
 import i18n from '+/core/i18n'
 import EventList from '+/ui/components/event-list'
 import EventMap from '+/ui/components/event-map'
+import EventForm from '+/ui/components/event-form'
 import {
   Tabs,
   Tab,
@@ -97,7 +98,7 @@ class Home extends View {
             >add</FontIcon>
           </FloatingActionButton>
         </div>
-        <Tabs className={styles.tabs} tabItemContainerStyle={{width: sizes.tabsWidth}}>
+        <Tabs className={styles.tabs} tabItemContainerStyle={{width: parseInt(sizes.tabsWidth)}}>
           <Tab 
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
@@ -120,7 +121,9 @@ class Home extends View {
           docked={false} 
           open={form.open}
         >
-          Ha
+          <EventForm
+            onCloseFormClickHandler={this.toggleForm.bind(this)} 
+          />
         </LeftNav>
       </div>
     )
