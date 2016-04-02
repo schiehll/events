@@ -3,7 +3,12 @@ import constants from '+/config/constants'
 import goTo from '+/actions/goTo'
 import Router from '+/core/Router'
 
-const {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR} = constants
+const {
+  LOGIN_REQUEST, 
+  LOGIN_SUCCESS, 
+  LOGIN_ERROR, 
+  SNACKBAR
+} = constants
 
 const login = (user : Object) : Function => {
   return dispatch => {
@@ -44,7 +49,7 @@ const login = (user : Object) : Function => {
         })
 
         dispatch({
-          type: 'SNACKBAR',
+          type: SNACKBAR,
           payload: {
             open: true,
             message: response.errors[0].message
@@ -66,12 +71,12 @@ const login = (user : Object) : Function => {
       })
 
       dispatch({
-          type: 'SNACKBAR',
-          payload: {
-            open: true,
-            message: err
-          }
-        })
+        type: SNACKBAR,
+        payload: {
+          open: true,
+          message: err
+        }
+      })
     })
   }
 }

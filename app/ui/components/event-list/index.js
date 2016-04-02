@@ -59,24 +59,8 @@ class EventList extends DumbComponent {
 
   deleteEvent(id : string) : void {
     const {dispatch, actions} = this.props
-    dispatch(actions.mutation(`
-      removeEvent(id: ${id}){
-        event{
-          id
-          name
-          address
-          date
-          image
-        }
-        user{
-          id
-          name
-        }
-        tags{
-          name
-        }
-      }
-    `, [EVENT_REMOVED, EVENTS_ERROR]))
+    dispatch(actions.deleteEvent(id))
+    dispatch(actions.progress())
 
     this.closeConfirmation()
   }
@@ -101,7 +85,7 @@ class EventList extends DumbComponent {
   }
 
   componentWillReceiveProps(nextProps : Object) : void {
-    if(!nextProps.events.errors){
+    if(!nextProps.events.hasOwnProperty('errors')){
       this.loadEvents(nextProps)
     }
   }
