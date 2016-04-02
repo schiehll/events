@@ -19,8 +19,8 @@ const {
 } = constants
 
 class EventList extends DumbComponent {
-  loadEvents() : void {
-    const {dispatch, actions, events} = this.props
+  loadEvents(props : Object) : void {
+    const {dispatch, actions, events} = props
     
     if(!events.events){
       dispatch(actions.getEvents())
@@ -97,7 +97,13 @@ class EventList extends DumbComponent {
   }
 
   componentDidMount() : void {
-    this.loadEvents()
+    this.loadEvents(this.props)
+  }
+
+  componentWillReceiveProps(nextProps : Object) : void {
+    if(!nextProps.events.errors){
+      this.loadEvents(nextProps)
+    }
   }
 
   onRender() : Object {
