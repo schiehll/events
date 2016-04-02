@@ -1,5 +1,6 @@
 import styles from '+/assets/styles/components/home.pcss'
 import colors from '+/assets/styles/variables/colors.pcss'
+import sizes from '+/assets/styles/variables/sizes.pcss'
 import React from 'react'
 import View from '+/core/View'
 import {route, title, restricted} from '+/utils/decorators'
@@ -10,7 +11,8 @@ import EventMap from '+/ui/components/event-map'
 import {
   Tabs,
   Tab,
-  FontIcon
+  FontIcon,
+  FloatingActionButton
 } from 'material-ui'
 
 @route({
@@ -75,7 +77,15 @@ class Home extends View {
         />
         <h2 className={styles.title}>{i18n.t(tab)}</h2>
         <h3 className={styles.subtitle}>{this.showSubtitle.bind(this)()}</h3>
-        <Tabs className={styles.tabs} tabItemContainerStyle={{width: 200}}>
+        <div className={styles.fab} onClick={() => console.log('faab')}>
+          <FloatingActionButton>
+            <FontIcon
+              color={colors.alternateText} 
+              className={`material-icons`}
+            >add</FontIcon>
+          </FloatingActionButton>
+        </div>
+        <Tabs className={styles.tabs} tabItemContainerStyle={{width: sizes.tabsWidth}}>
           <Tab 
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
