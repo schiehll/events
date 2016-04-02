@@ -66,7 +66,7 @@ class Home extends View {
   }
 
   onRender() : Object {
-    const {auth, tab, events} = this.state
+    const {auth, tab} = this.state
     return(
       <div className={styles.main}>
         <Header 
@@ -82,8 +82,7 @@ class Home extends View {
           >
             <EventList 
               {...this.props} 
-              events={events} 
-              auth={auth} 
+              {...this.state} 
               onTagFilterHandler={this.handleTagFilter.bind(this)} 
             />
           </Tab>

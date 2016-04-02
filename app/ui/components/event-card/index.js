@@ -22,7 +22,7 @@ class EventCard extends DumbComponent {
 
   handleDeleteClick() : void {
     const {event, onDeleteClickHandler} = this.props
-    onDeleteClickHandler(event.id)
+    onDeleteClickHandler({id: event.id})
   }
 
   onRender() : Object {

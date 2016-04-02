@@ -14,5 +14,9 @@ export default {
   TAB_MAP: 'Mapa',
   SHOWING_ALL: '#semfiltro',
   CLICK_ON_MARKS_TO_INFOS: 'Selecione um evento no mapa para ver as informações',
-  FILTERED_BY: 'Filtrados por #{{tag}}'
+  FILTERED_BY: 'Filtrados por #{{tag}}',
+  CONFIRMATION_TITLE: 'Você têm certeza?',
+  CONFIRMATION_TEXT: 'Após confirmação a ação não poderá ser desfeita',
+  CANCEL: 'Cancelar',
+  CONFIRM: 'Confirmar'
 }

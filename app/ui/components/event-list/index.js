@@ -4,8 +4,14 @@ import DumbComponent from '+/core/DumbComponent'
 import EventCard from '+/ui/components/event-card'
 import constants from '+/config/constants'
 import {getLatLng} from '+/utils/maps'
+import {Dialog, FlatButton} from 'material-ui'
+import i18n from '+/core/i18n'
 
-const {EVENTS_SUCCESS, EVENT_REMOVED, EVENTS_ERROR} = constants
+const {
+  EVENTS_SUCCESS, 
+  EVENT_REMOVED, 
+  EVENTS_ERROR
+} = constants
 
 class EventList extends DumbComponent {
   loadEvents() : void {
@@ -66,11 +72,41 @@ class EventList extends DumbComponent {
         }
       }
     `, [EVENT_REMOVED, EVENTS_ERROR]))
+
+    this.closeConfirmation()
+  }
+
+  closeConfirmation() : void {
+    const {dispatch, actions} = this.props
+    dispatch(actions.confirmation({
+      open: false
+    }))
+  }
+
+  openConfirmation(args : Object) : void {
+    const {dispatch, actions} = this.props
+    dispatch(actions.confirmation({
+      open: true,
+      ...args
+    }))
   }
 
   onRender() : Object {
     this.loadEvents()
-    const {auth, events} = this.props
+    const {auth, events, confirmation} = this.props
+
+    const actions = [
+      <FlatButton
+        label={i18n.t('CANCEL')}
+        secondary={true}
+        onTouchTap={this.closeConfirmation.bind(this)}
+      />,
+      <FlatButton
+        label={i18n.t('CONFIRM')}
+        primary={true}
+        onTouchTap={this.deleteEvent.bind(this, confirmation.id)}
+      />,
+    ]
 
     return(
       <div className={styles.list}>
@@ -78,12 +114,20 @@ class EventList extends DumbComponent {
           <div key={i} className={styles.event}>
             <EventCard 
               {...event} 
-              auth={auth} 
+              auth={auth}
               onTagClickHandler={this.fiterByTag.bind(this)}
-              onDeleteClickHandler={this.deleteEvent.bind(this)}
+              onDeleteClickHandler={this.openConfirmation.bind(this)}
             />
           </div>
         </For>
+        <Dialog
+          title={i18n.t('CONFIRMATION_TITLE')}
+          actions={actions}
+          modal={false}
+          open={confirmation.open}
+        >
+          {i18n.t('CONFIRMATION_TEXT')}
+        </Dialog>
       </div>
     )
   }
