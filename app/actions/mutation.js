@@ -7,7 +7,7 @@ const mutation = (m : string, callbacks : string[]) : Function => {
       if(!response.hasOwnProperty('errors')){
         dispatch({
           type: SUCCESS,
-          payload: response
+          payload: response.data
         })
       }
       else{

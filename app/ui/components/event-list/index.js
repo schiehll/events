@@ -5,10 +5,11 @@ import EventCard from '+/ui/components/event-card'
 import constants from '+/config/constants'
 import {getLatLng} from '+/utils/maps'
 
+const {EVENTS_SUCCESS, EVENT_REMOVED, EVENTS_ERROR} = constants
+
 class EventList extends DumbComponent {
   loadEvents() : void {
     const {dispatch, actions, events} = this.props
-    const {EVENTS_SUCCESS} = constants
     
     if(!events.events){
       dispatch(actions.getEvents())
@@ -45,6 +46,28 @@ class EventList extends DumbComponent {
     onTagFilterHandler(tag)
   }
 
+  deleteEvent(id : string) : void {
+    const {dispatch, actions} = this.props
+    dispatch(actions.mutation(`
+      removeEvent(id: ${id}){
+        event{
+          id
+          name
+          address
+          date
+          image
+        }
+        user{
+          id
+          name
+        }
+        tags{
+          name
+        }
+      }
+    `, [EVENT_REMOVED, EVENTS_ERROR]))
+  }
+
   onRender() : Object {
     this.loadEvents()
     const {auth, events} = this.props
@@ -53,7 +76,12 @@ class EventList extends DumbComponent {
       <div className={styles.list}>
         <For each="event" index="i" of={events.events || []}>
           <div key={i} className={styles.event}>
-            <EventCard {...event} auth={auth} onTagClickHandler={this.fiterByTag.bind(this)}/>
+            <EventCard 
+              {...event} 
+              auth={auth} 
+              onTagClickHandler={this.fiterByTag.bind(this)}
+              onDeleteClickHandler={this.deleteEvent.bind(this)}
+            />
           </div>
         </For>
       </div>

@@ -3,6 +3,8 @@ export default {
   LOGIN: 'Login',
   LOGOUT: 'Sair',
   ENTER: 'Entrar',
+  EDIT: 'Editar',
+  DELETE: 'Deletar',
   EMAIL: 'Email',
   PASSWORD: 'Senha',
   INVALID_CREDENTIALS: 'Credenciais inválidas',

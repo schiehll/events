@@ -3,6 +3,7 @@ import colors from '+/assets/styles/variables/colors.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
 import {formatDate} from '+/utils/date'
+import i18n from '+/core/i18n'
 import {
   Card,
   CardHeader,
@@ -17,6 +18,11 @@ import {
 class EventCard extends DumbComponent {
   handleTagClick(tag : string) : void {
     this.props.onTagClickHandler(tag)
+  }
+
+  handleDeleteClick() : void {
+    const {event, onDeleteClickHandler} = this.props
+    onDeleteClickHandler(event.id)
   }
 
   onRender() : Object {
@@ -48,10 +54,11 @@ class EventCard extends DumbComponent {
                     iconButtonElement={<FontIcon color={colors.secondaryText} className="material-icons">more_vert</FontIcon>}
                   >
                     <MenuItem 
-                      primaryText="editar"
+                      primaryText={i18n.t('EDIT')}
                     />
                     <MenuItem 
-                      primaryText="excluir"
+                      primaryText={i18n.t('DELETE')}
+                      onClick={this.handleDeleteClick.bind(this)}
                     />
                   </IconMenu>
                 </If>

@@ -13,6 +13,7 @@ const constants : string[] = [
   'CHANGE_SUBTITLE',
   'EVENTS_SUCCESS',
   'EVENTS_ERROR',
+  'EVENT_REMOVED',
   'SHOW_EVENT_INFO'
 ]
 
