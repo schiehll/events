@@ -80,7 +80,12 @@ class Home extends View {
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
           >
-            <EventList {...this.props} events={events} auth={auth} onTagFilterHandler={this.handleTagFilter.bind(this)} />
+            <EventList 
+              {...this.props} 
+              events={events} 
+              auth={auth} 
+              onTagFilterHandler={this.handleTagFilter.bind(this)} 
+            />
           </Tab>
           <Tab 
             label={i18n.t('TAB_MAP')} 

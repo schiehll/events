@@ -13,19 +13,29 @@ class EventList extends DumbComponent {
     if(!events.events){
       dispatch(actions.getEvents())
     }
-    else if(!events.events[0].event.hasOwnProperty('lat')){
-      const eventsPromises = events.events.map(event => {
-        return getLatLng(event)
+    else{
+      const eventsWithoutPosition = events.events.filter(e => {
+        return !e.event.lat || !e.event.lng
       })
 
-      Promise.all(eventsPromises).then(response => {
-        dispatch({
-          type: EVENTS_SUCCESS,
-          payload: {
-            events: response
-          }
+      if(eventsWithoutPosition.length > 0){
+        const eventsPromises = eventsWithoutPosition.map(event => {
+          return getLatLng(event)
         })
-      })
+
+        const eventsWithPosition = events.events.filter(e => {
+          return e.event.lat && e.event.lng
+        })
+
+        Promise.all(eventsPromises).then(response => {
+          dispatch({
+            type: EVENTS_SUCCESS,
+            payload: {
+              events: [...response, ...eventsWithPosition]
+            }
+          })
+        })
+      }
     }
   }
 
