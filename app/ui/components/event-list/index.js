@@ -4,7 +4,12 @@ import DumbComponent from '+/core/DumbComponent'
 import EventCard from '+/ui/components/event-card'
 import constants from '+/config/constants'
 import {getLatLng} from '+/utils/maps'
-import {Dialog, FlatButton} from 'material-ui'
+import {
+  Dialog, 
+  FlatButton,
+  Card,
+  CardHeader
+} from 'material-ui'
 import i18n from '+/core/i18n'
 
 const {
@@ -91,8 +96,11 @@ class EventList extends DumbComponent {
     }))
   }
 
-  onRender() : Object {
+  componentDidMount() : void {
     this.loadEvents()
+  }
+
+  onRender() : Object {
     const {auth, events, confirmation} = this.props
 
     const actions = [
@@ -109,25 +117,36 @@ class EventList extends DumbComponent {
     ]
 
     return(
-      <div className={styles.list}>
-        <For each="event" index="i" of={events.events || []}>
-          <div key={i} className={styles.event}>
-            <EventCard 
-              {...event} 
-              auth={auth}
-              onTagClickHandler={this.fiterByTag.bind(this)}
-              onDeleteClickHandler={this.openConfirmation.bind(this)}
-            />
+      <div>
+        <If condition={events.events}>
+          <div className={styles.list}>
+            <For each="event" index="i" of={events.events}>
+              <div key={i} className={styles.event}>
+                <EventCard 
+                  {...event} 
+                  auth={auth}
+                  onTagClickHandler={this.fiterByTag.bind(this)}
+                  onDeleteClickHandler={this.openConfirmation.bind(this)}
+                />
+              </div>
+            </For>
+            <Dialog
+              title={i18n.t('CONFIRMATION_TITLE')}
+              actions={actions}
+              modal={false}
+              open={confirmation.open}
+            >
+              {i18n.t('CONFIRMATION_TEXT')}
+            </Dialog>
           </div>
-        </For>
-        <Dialog
-          title={i18n.t('CONFIRMATION_TITLE')}
-          actions={actions}
-          modal={false}
-          open={confirmation.open}
-        >
-          {i18n.t('CONFIRMATION_TEXT')}
-        </Dialog>
+        <Else />
+          <Card className={styles.empty}>
+            <CardHeader
+              title={i18n.t('NO_EVENTS_TITLE')}
+              subtitle={i18n.t('NO_EVENTS_SUBTITLE')}
+            />
+          </Card>
+        </If>
       </div>
     )
   }

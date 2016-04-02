@@ -18,5 +18,7 @@ export default {
   CONFIRMATION_TITLE: 'Você têm certeza?',
   CONFIRMATION_TEXT: 'Após confirmação a ação não poderá ser desfeita',
   CANCEL: 'Cancelar',
-  CONFIRM: 'Confirmar'
+  CONFIRM: 'Confirmar',
+  NO_EVENTS_TITLE: 'Oops',
+  NO_EVENTS_SUBTITLE: 'Não há eventos no momento'
 }

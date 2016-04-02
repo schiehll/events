@@ -70,35 +70,42 @@ class EventMap extends Component {
 
     return(
       <Card className={styles.map}>
-        <CardHeader title={i18n.t('CLICK_ON_MARKS_TO_INFOS')} />
-        <CardMedia>
-          <GoogleMapLoader
-            containerElement={<div className={styles.googlemap} />}
-            googleMapElement={
-              <GoogleMap
-                defaultZoom={6}
-                center={center}
-                options={{disableDefaultUI: true}}
-              >
-              {markers.map((marker, index) => {
-                return(
-                  <Marker 
-                    key={index} 
-                    position={marker.position}
-                    onClick={this.openEventInfo.bind(this, marker.event)}
-                  >
-                    <If condition={map.event.hasOwnProperty('id') && map.event.id === marker.event.id}>
-                      <InfoWindow>
-                        <EventInfoWindow {...marker.event} />
-                      </InfoWindow>
-                    </If>
-                  </Marker>
-                )
-              })}
-              </GoogleMap>
-            }
+        <If condition={events.events}>
+          <CardHeader title={i18n.t('CLICK_ON_MARKS_TO_INFOS')} />
+          <CardMedia>
+            <GoogleMapLoader
+              containerElement={<div className={styles.googlemap} />}
+              googleMapElement={
+                <GoogleMap
+                  defaultZoom={6}
+                  center={center}
+                  options={{disableDefaultUI: true}}
+                >
+                {markers.map((marker, index) => {
+                  return(
+                    <Marker 
+                      key={index} 
+                      position={marker.position}
+                      onClick={this.openEventInfo.bind(this, marker.event)}
+                    >
+                      <If condition={map.event.hasOwnProperty('id') && map.event.id === marker.event.id}>
+                        <InfoWindow>
+                          <EventInfoWindow {...marker.event} />
+                        </InfoWindow>
+                      </If>
+                    </Marker>
+                  )
+                })}
+                </GoogleMap>
+              }
+            />
+          </CardMedia>
+        <Else />
+          <CardHeader
+            title={i18n.t('NO_EVENTS_TITLE')}
+            subtitle={i18n.t('NO_EVENTS_SUBTITLE')}
           />
-        </CardMedia>
+        </If>
       </Card>
     )
   }
