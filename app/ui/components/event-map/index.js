@@ -21,31 +21,39 @@ class EventMap extends Component {
     const {events, map} = this.state
 
     const bounds = new google.maps.LatLngBounds()
-    if(events.events && events.events[0].event.hasOwnProperty('lat')){
-      events.events.forEach((e, index) => {
-        const {event} = e
-        const marker = {
-          event: event,
-          position: {
-            lat: event.lat, 
-            lng: event.lng
-          }
-        }
 
-        let exist = false
-        markers.forEach(mark => {
-          if(mark.position.lat === marker.position.lat 
-            && mark.position.lng === marker.position.lng){
-            exist = true
-            return
+
+    if(events.events){
+      const eventsWithoutPosition = events.events.filter(e => {
+        return !e.event.lat || !e.event.lng
+      })
+
+      if(!eventsWithoutPosition.length){
+        events.events.forEach((e, index) => {
+          const {event} = e
+          const marker = {
+            event: event,
+            position: {
+              lat: event.lat, 
+              lng: event.lng
+            }
+          }
+
+          let exist = false
+          markers.forEach(mark => {
+            if(mark.position.lat === marker.position.lat 
+              && mark.position.lng === marker.position.lng){
+              exist = true
+              return
+            }
+          })
+
+          if(!exist){
+            markers.push(marker)
+            bounds.extend(new google.maps.LatLng(marker.position.lat, marker.position.lng))
           }
         })
-
-        if(!exist){
-          markers.push(marker)
-          bounds.extend(new google.maps.LatLng(marker.position.lat, marker.position.lng))
-        }
-      })
+      }
     }
 
     let center = {
