@@ -10,7 +10,7 @@ export default {
   EVENT_MAP: 'Mapa de eventos',
   TAB_LIST: 'Lista',
   TAB_MAP: 'Mapa',
-  SHOWING_ALL: 'Mostrando todos',
+  SHOWING_ALL: '#semfiltro',
   CLICK_ON_MARKS_TO_INFOS: 'Selecione um evento no mapa para ver as informações',
   FILTERED_BY: 'Filtrados por #{{tag}}'
 }
