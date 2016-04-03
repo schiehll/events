@@ -2,6 +2,7 @@ class Auth {
   _fetch(data : string, token : boolean = false) : Promise {
     return new Promise((resolve, reject) => {
       let headers = {
+        'Accept': 'application/json',
         'Content-Type': 'application/graphql'
       }
 

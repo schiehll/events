@@ -5,6 +5,7 @@ class Api {
         method: 'post',
         headers: {
           'Content-Type': 'application/graphql',
+          'Accept': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem(`${CONFIG.STORAGE_KEY}.jwt`)}`
         },
         body: data

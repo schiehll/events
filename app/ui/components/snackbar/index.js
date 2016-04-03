@@ -18,7 +18,7 @@ class Snackbar extends Component {
       <SnackbarMUI
         open={snackbar.open}
         message={
-          snackbar.message 
+          snackbar.message && typeof snackbar.message === 'string'
             ? i18n.t(snackbar.message)
             : ''
         }

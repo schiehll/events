@@ -70,13 +70,7 @@ const login = (user : Object) : Function => {
         }
       })
 
-      dispatch({
-        type: SNACKBAR,
-        payload: {
-          open: true,
-          message: err
-        }
-      })
+      console.log(err);
     })
   }
 }
