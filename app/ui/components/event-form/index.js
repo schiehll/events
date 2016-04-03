@@ -13,25 +13,30 @@ import i18n from '+/core/i18n'
 import {formatDate, formatTime} from '+/utils/date'
 
 class EventForm extends Component {
-  handleCloseClick() : void {
-    this.props.onCloseFormClickHandler()
+  closeForm() : void {
+    const {dispatch, actions} = this.props
+    dispatch(actions.changeForm({
+      open: false,
+      fields: {}
+    }))
   }
 
   saveEvent() : void {
+    const {fields} = this.state.form
     this.data = {
-      name: this.name.refs.input.value,
-      address: this.address.refs.input.value,
-      image: this.image.refs.input.value,
+      name: fields.name,
+      address: fields.address,
+      image: fields.image,
       tags: this.getTags()
     }
 
     if(this.validateData()){
       this.data.date = this.getDateAndTime()
-      const {dispatch, actions, onCloseFormClickHandler} = this.props
+      const {dispatch, actions} = this.props
       
       dispatch(actions.saveEvent(this.data))
       dispatch(actions.progress())
-      onCloseFormClickHandler()
+      this.closeForm()
     }
   }
 
@@ -64,7 +69,8 @@ class EventForm extends Component {
   }
 
   getTags() : string[] {
-    return this.tags.refs.input.value.split('#').map(tag => tag.trim()).filter(tag => tag !== '')
+    const allTags = this.state.form.fields.tags || ''
+    return allTags.split('#').map(tag => tag.trim()).filter(tag => tag !== '')
   }
 
   updateDate(instance, date) : void {
@@ -75,8 +81,22 @@ class EventForm extends Component {
     this.time = formatTime(time)
   }
 
+  handleFormValue(e) : void {
+    const {form} = this.state
+    const {dispatch, actions} = this.props
+    dispatch(actions.changeForm({
+      open: true,
+      fields: {
+        ...form.fields,
+        [e.target.name]: e.target.value
+      }
+    }))
+  }
+
   onRender() : Object {
-    const {validation} = this.state
+    const {validation, form} = this.state
+
+    console.log('form', form.fields);
 
     return(
       <div>
@@ -85,13 +105,15 @@ class EventForm extends Component {
           <FontIcon
             color={colors.darkPrimary} 
             className={`material-icons ${styles.close}`}
-            onClick={this.handleCloseClick.bind(this)}
+            onClick={this.closeForm.bind(this)}
           >clear</FontIcon>
         </div>
         <form className={styles.fields}>
           <TextField
+            name="name"
+            value={form.fields.name || ''}
+            onChange={this.handleFormValue.bind(this)}
             type="text"
-            ref={i => this.name = i}
             hintText={i18n.t('NAME')}
             fullWidth={true}
             errorText={
@@ -99,8 +121,10 @@ class EventForm extends Component {
             }
           /><br/>
           <TextField
+            name="address"
+            value={form.fields.address || ''}
+            onChange={this.handleFormValue.bind(this)}
             type="text"
-            ref={i => this.address = i}
             hintText={i18n.t('ADDRESS')}
             fullWidth={true}
             errorText={
@@ -108,8 +132,10 @@ class EventForm extends Component {
             }
           /><br/>
           <TextField
+            name="image"
+            value={form.fields.image || ''}
+            onChange={this.handleFormValue.bind(this)}
             type="text"
-            ref={i => this.image = i}
             hintText={i18n.t('IMAGE_URL')}
             fullWidth={true}
             errorText={
@@ -117,6 +143,7 @@ class EventForm extends Component {
             }
           /><br/>
           <DatePicker 
+            ref={i => this.dateRef = i}
             hintText={i18n.t('DATE')}
             wordings={{cancel: i18n.t('CANCEL')}} 
             minDate={new Date()}
@@ -131,6 +158,7 @@ class EventForm extends Component {
             }
           />
           <TimePicker
+            ref={i => this.timeRef = i}
             hintText={i18n.t('TIME')}
             format="24hr"
             autoOk={true}
@@ -141,8 +169,10 @@ class EventForm extends Component {
             }
           />
           <TextField
+            name="tags"
+            value={form.fields.tags || ''}
+            onChange={this.handleFormValue.bind(this)}
             type="text"
-            ref={i => this.tags = i}
             hintText={i18n.t('TAGS')}
             fullWidth={true}
           /><br/>

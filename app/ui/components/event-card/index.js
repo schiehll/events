@@ -25,6 +25,11 @@ class EventCard extends DumbComponent {
     onDeleteClickHandler({id: event.id})
   }
 
+  handleEditClick() : void {
+    const {event, tags, onEditClickHandler} = this.props
+    onEditClickHandler({event, tags})
+  }
+
   onRender() : Object {
     const {event, user, tags, auth} = this.props
     return(
@@ -55,6 +60,7 @@ class EventCard extends DumbComponent {
                   >
                     <MenuItem 
                       primaryText={i18n.t('EDIT')}
+                      onClick={this.handleEditClick.bind(this)}
                     />
                     <MenuItem 
                       primaryText={i18n.t('DELETE')}

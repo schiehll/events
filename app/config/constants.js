@@ -18,7 +18,8 @@ const constants : string[] = [
   'EVENT_SAVED',
   'SHOW_EVENT_INFO',
   'CONFIRMATION',
-  'VALIDATION'
+  'VALIDATION',
+  'CHANGE_FORM'
 ]
 
 export default stringsToObject(constants)

@@ -42,6 +42,20 @@ class Home extends View {
     }))
   }
 
+  handleEdit(event : Object) : void {
+    const {form} = this.state
+    const {dispatch, actions} = this.props
+    let tags = ''
+    event.tags.forEach(tag => tags += `#${tag.name} `)
+    dispatch(actions.changeForm({
+      open: true,
+      fields: {
+        ...event.event,
+        tags
+      }
+    }))
+  }
+
   clearFilter() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.getEvents())
@@ -71,13 +85,13 @@ class Home extends View {
 
   toggleForm() : void {
     const {form} = this.state
-    const {dispatch} = this.props
-    dispatch({
-      type: 'TOGGLE_FORM',
-      payload: {
-        open: !form.open
+    const {dispatch, actions} = this.props
+    dispatch(actions.changeForm({
+      open: !form.open,
+      fields: {
+        ...form.fields
       }
-    })
+    }))
   }
 
   onRender() : Object {
@@ -107,6 +121,7 @@ class Home extends View {
               {...this.props} 
               {...this.state} 
               onTagFilterHandler={this.handleTagFilter.bind(this)} 
+              onEditClickHandler={this.handleEdit.bind(this)} 
             />
           </Tab>
           <Tab 
@@ -123,7 +138,6 @@ class Home extends View {
         >
           <EventForm
             {...this.props}
-            onCloseFormClickHandler={this.toggleForm.bind(this)} 
           />
         </LeftNav>
       </div>

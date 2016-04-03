@@ -1,12 +1,13 @@
 import constants from '+/config/constants'
 
-//const {CONFIRMATION} = constants
+const {CHANGE_FORM} = constants
 
 const form = (state = {
-  open: false
+  open: false,
+  fields: {}
 }, action) : Object => {
   switch (action.type) {
-    case 'TOGGLE_FORM':
+    case CHANGE_FORM:
       return action.payload
     default:
       return state

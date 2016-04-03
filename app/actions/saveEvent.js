@@ -28,6 +28,7 @@ const saveEvent = (data : Object) : Function => {
       }
     })
     const tagArg = tags.length > 0 ? tagstr : ''
+    
     Api.mutate(`
       newEvent(
         name: "${name}",

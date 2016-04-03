@@ -80,6 +80,10 @@ class EventList extends DumbComponent {
     }))
   }
 
+  handleEditClick(event : Object) : void {
+    this.props.onEditClickHandler(event)
+  }
+
   componentDidMount() : void {
     this.loadEvents(this.props)
   }
@@ -117,6 +121,7 @@ class EventList extends DumbComponent {
                   auth={auth}
                   onTagClickHandler={this.fiterByTag.bind(this)}
                   onDeleteClickHandler={this.openConfirmation.bind(this)}
+                  onEditClickHandler={this.handleEditClick.bind(this)}
                 />
               </div>
             </For>
