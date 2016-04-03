@@ -10,8 +10,9 @@ test('should extends React.Component', t => {
 })
 
 test('should have a Helmet component as child', t => {
+  const props = {location: {pathname: ''}}
   const component = shallow(
-    <App>
+    <App {...props}>
       <Home />
     </App>
   )

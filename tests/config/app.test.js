@@ -8,7 +8,9 @@ test('should contains the required info', t => {
     'ENV',
     'NAME',
     'STORAGE_KEY',
-    'API_URL'
+    'API_URL',
+    'GOOGLE_MAPS_KEY',
+    'GOOGLE_MAPS_KEY_FALLBACK'
   ]
   const actual = Object.keys(config)
 

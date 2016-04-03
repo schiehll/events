@@ -1,4 +1,4 @@
-import 'react-progress-bar-plus/lib/progress-bar.css'
+//import 'react-progress-bar-plus/lib/progress-bar.css'
 import styles from '+/assets/styles/app.pcss'
 import React, {PropTypes} from 'react'
 import Snackbar from '+/ui/components/snackbar'
