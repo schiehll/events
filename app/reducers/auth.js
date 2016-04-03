@@ -10,7 +10,9 @@ const auth = (state = {
     case LOGIN_REQUEST:
       return state
     case LOGIN_SUCCESS:
+      return action.payload
     case LOGIN_ERROR:
+      return action.payload
     case LOGOUT:
       return action.payload
     default:

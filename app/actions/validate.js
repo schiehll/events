@@ -2,7 +2,7 @@ import constants from '+/config/constants'
 
 const {SNACKBAR, VALIDATION} = constants
 
-const validate = (fields : Object, message : string = 'EMPTY_FIELDS') : Function => {
+const validate = (fields : Array, message : string = 'EMPTY_FIELDS') : Function => {
   return dispatch => {
     const action = {
       type: VALIDATION,

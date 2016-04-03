@@ -52,6 +52,7 @@ class Home extends View {
     let time = new Date(event.event.date)
     time.setDate(new Date().getDate())
     dispatch(actions.changeForm({
+      editing: true,
       open: true,
       fields: {
         ...event.event,
@@ -93,6 +94,7 @@ class Home extends View {
     const {form} = this.state
     const {dispatch, actions} = this.props
     dispatch(actions.changeForm({
+      editing: form.editing,
       open: !form.open,
       fields: {
         ...form.fields

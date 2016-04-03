@@ -31,8 +31,10 @@ export default {
   NO_EVENTS_TITLE: 'Oops',
   NO_EVENTS_SUBTITLE: 'Não há eventos no momento',
   EVENT_DELETED_WITH_SUCCESS: 'Evento deletado com sucesso',
-  EVENT_COULD_NOT_BE_DELETED: 'Oops, algo errado aconteceu',
   EVENT_SAVED_WITH_SUCCESS: 'Evento adicionado com sucesso',
+  EVENT_UPDATED_WITH_SUCCESS: 'Evento salvo com sucesso',
+  EVENT_COULD_NOT_BE_DELETED: 'Oops, algo errado aconteceu',
   EVENT_COULD_NOT_BE_SAVED: 'Oops, algo errado aconteceu',
-  ADD_EVENT_FORM_TITLE: 'Adicionar evento'
+  ADD_EVENT_FORM_TITLE: 'Adicionar evento',
+  EDIT_EVENT_FORM_TITLE: 'Editar evento'
 }

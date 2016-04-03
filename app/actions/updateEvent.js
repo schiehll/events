@@ -8,7 +8,7 @@ const {
   EVENTS_REQUEST
 } = constants
 
-const saveEvent = (data : Object) : Function => {
+const updateEvent = (data : Object) : Function => {
   return dispatch => {
     dispatch({
       type: EVENTS_REQUEST,
@@ -17,7 +17,7 @@ const saveEvent = (data : Object) : Function => {
       }
     })
 
-    const {name, address, image, tags, date} = data
+    const {id, name, address, image, tags, date} = data
     let tagstr = ', tags: ['
     tags.forEach((tag, index) => {
       if(index < tags.length - 1){
@@ -30,7 +30,8 @@ const saveEvent = (data : Object) : Function => {
     const tagArg = tags.length > 0 ? tagstr : ''
     
     Api.mutate(`
-      newEvent(
+      updateEvent(
+        id: ${id},
         name: "${name}",
         address: "${address}",
         image: "${image}",
@@ -65,7 +66,7 @@ const saveEvent = (data : Object) : Function => {
           type: SNACKBAR,
           payload: {
             open: true,
-            message: 'EVENT_SAVED_WITH_SUCCESS'
+            message: 'EVENT_UPDATED_WITH_SUCCESS'
           }
         })
       }
@@ -91,4 +92,4 @@ const saveEvent = (data : Object) : Function => {
   }
 }
 
-export default saveEvent
+export default updateEvent

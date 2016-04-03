@@ -3,6 +3,7 @@ import constants from '+/config/constants'
 const {CHANGE_FORM} = constants
 
 const form = (state = {
+  editing: false,
   open: false,
   fields: {}
 }, action) : Object => {

@@ -16,14 +16,26 @@ class EventForm extends Component {
   closeForm() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.changeForm({
+      editing: false,
       open: false,
       fields: {}
     }))
+
+    dispatch(actions.validate([]))
   }
 
-  saveEvent() : void {
+  addEvent() : void {
+    this.saveEvent(this.props.actions.addEvent)
+  }
+
+  updateEvent() : void {
+    this.saveEvent(this.props.actions.updateEvent)
+  }
+
+  saveEvent(action : Function) : void {
     const {fields} = this.state.form
     this.data = {
+      id: fields.id,
       name: fields.name,
       address: fields.address,
       image: fields.image,
@@ -34,7 +46,7 @@ class EventForm extends Component {
       this.data.date = this.getDateAndTime()
       const {dispatch, actions} = this.props
       
-      dispatch(actions.saveEvent(this.data))
+      dispatch(action(this.data))
       dispatch(actions.progress())
       this.closeForm()
     }
@@ -79,6 +91,7 @@ class EventForm extends Component {
     const {form} = this.state
     const {dispatch, actions} = this.props
     dispatch(actions.changeForm({
+      editing: form.editing,
       open: true,
       fields: {
         ...form.fields,
@@ -91,6 +104,7 @@ class EventForm extends Component {
     const {form} = this.state
     const {dispatch, actions} = this.props
     dispatch(actions.changeForm({
+      editing: form.editing,
       open: true,
       fields: {
         ...form.fields,
@@ -103,6 +117,7 @@ class EventForm extends Component {
     const {form} = this.state
     const {dispatch, actions} = this.props
     dispatch(actions.changeForm({
+      editing: form.editing,
       open: true,
       fields: {
         ...form.fields,
@@ -117,7 +132,7 @@ class EventForm extends Component {
     return(
       <div>
         <div className={styles.title}>
-          <h2>{i18n.t('ADD_EVENT_FORM_TITLE')}</h2>
+          <h2>{i18n.t(form.editing ? 'EDIT_EVENT_FORM_TITLE' : 'ADD_EVENT_FORM_TITLE')}</h2>
           <FontIcon
             color={colors.darkPrimary} 
             className={`material-icons ${styles.close}`}
@@ -198,7 +213,7 @@ class EventForm extends Component {
             label={i18n.t('SAVE')} 
             fullWidth={true}
             style={{marginTop: 10}}
-            onClick={this.saveEvent.bind(this)}
+            onClick={form.editing ? this.updateEvent.bind(this) : this.addEvent.bind(this)}
           />
         </form>
       </div>
