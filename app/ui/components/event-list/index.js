@@ -21,7 +21,7 @@ const {
 class EventList extends DumbComponent {
   loadEvents(props : Object) : void {
     const {dispatch, actions, events} = props
-    
+
     if(!events.events){
       dispatch(actions.getEvents())
     }

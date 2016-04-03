@@ -34,7 +34,8 @@ class EventCard extends DumbComponent {
     const {event, user, tags, auth} = this.props
     return(
       <Card>
-        <CardHeader
+        <CardHeader 
+          className={styles.title}
           title={event.name}
           subtitle={`@${user.name}`}
         />
