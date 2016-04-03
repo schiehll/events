@@ -1,3 +1,0 @@
-# duct-js
-
-> WIP

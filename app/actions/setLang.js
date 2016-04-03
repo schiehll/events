@@ -10,7 +10,7 @@ const setLang = (language : string) : Function => {
       payload: language
     }
 
-    const loadLang : Function = i18n.loadLangData(language)
+    const loadLang = i18n.loadLangData(language)
     loadLang().then(lang => {
       i18n.setLang(lang)
       localStorage.setItem(`${CONFIG.STORAGE_KEY}.lang`, language)

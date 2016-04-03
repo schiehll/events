@@ -35,7 +35,10 @@ export default {
       'fetch': 'exports?self.fetch!whatwg-fetch'
     }),
     new webpack.DefinePlugin({
-      'CONFIG': JSON.stringify(config)
+      'CONFIG': JSON.stringify(config),
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
     })
   ],
 

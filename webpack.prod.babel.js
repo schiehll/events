@@ -18,6 +18,13 @@ config.module.loaders.push(
     test: /\.pcss$/,
     include: path.join(__dirname, 'app/assets/styles'),
     loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!postcss')
+  },
+  { 
+    test: /\.css$/,
+    loaders: [
+      'style',
+      'css'
+    ]
   }
 )
 

@@ -15,7 +15,8 @@
     "build:local": "npm run clean && cross-env NODE_ENV=local webpack --config webpack.local.babel.js",
     "build": "npm run build:local",
     "postinstall": "npm run build:prod",
-    "local": "npm run build && cross-env NODE_ENV=local babel-node server.local.js"
+    "local": "npm run build && cross-env NODE_ENV=local babel-node server.local.js",
+    "start": "cross-env NODE_ENV=production nodemon server.js --exec babel-node"
   },
   "ava": {
     "files": [
@@ -105,9 +106,11 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.2",
+    "bundle-loader": "^0.5.4",
     "intl": "^1.1.0",
     "material-ui": "^0.15.0-alpha.2",
     "micro-i18n": "^1.0.0",
+    "nodemon": "^1.9.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-google-maps": "^4.9.1",
