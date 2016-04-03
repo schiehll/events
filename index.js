@@ -8,14 +8,14 @@ injectTapEventPlugin()
 const loadLang = i18n.loadLangData(localStorage.getItem(`${CONFIG.STORAGE_KEY}.lang`) || CONFIG.DEFAULT_LANG)
 const appRoot : Object = document.getElementById('app')
 
-let render : Function = () : void => {
+let render = () : void => {
   const Root : Object = require('./app/core/Root').default
   ReactDOM.render(<Root />, appRoot)
 }
 
 if(module.hot) {
-  const renderApp : Function = render
-  const renderError : Function = (error : Object) : void => {
+  const renderApp = render
+  const renderError = (error : Object) : void => {
     const RedBox : Object = require('redbox-react')
     ReactDOM.render(<RedBox error={error} />, appRoot)
   }
@@ -34,7 +34,26 @@ if(module.hot) {
   })
 }
 
-loadLang().then(lang => {
-  i18n.setLang(lang)
-  render()
-})
+const startApp = () : void => {
+  loadLang().then(lang => {
+    i18n.setLang(lang)
+    render()
+  })
+}
+
+if(!global.Intl) {
+  require.ensure([
+    'intl',
+    'intl/locale-data/jsonp/en-US.js',
+    'intl/locale-data/jsonp/pt-BR.js'
+  ], require => {
+    require('intl')
+    require('intl/locale-data/jsonp/en-US.js')
+    require('intl/locale-data/jsonp/pt-BR.js')
+    
+    startApp()
+  })
+} 
+else {
+  startApp()
+}
