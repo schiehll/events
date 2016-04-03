@@ -7,7 +7,7 @@ export const formatDateAndTime = (date : Date) : string => {
     hour12: false
   }
   const formatedDate = new Intl.DateTimeFormat(i18n.locale, options).format(date)
-  return formatedDate.replace(' ', ' - ')
+  return formatedDate.replace(',', '').replace(' ', ' - ')
 }
 
 export const formatDate = (date : Date) : string => {

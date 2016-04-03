@@ -4,7 +4,7 @@ dotenv.config({silent: true})
 
 export default {
   INDEX_ROUTE: 'home',
-  DEFAULT_LANG: 'pt-BR',
+  DEFAULT_LANG: 'en-US',
   ENV: process.env.NODE_ENV || 'local',
   NAME: process.env.npm_package_name || 'App',
   STORAGE_KEY: process.env.STORAGE_KEY || 'storagekey',

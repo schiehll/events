@@ -174,6 +174,7 @@ class EventForm extends Component {
             }
           /><br/>
           <DatePicker 
+            className="ueh"
             value={form.fields.date || ''}
             hintText={i18n.t('DATE')}
             cancelLabel={i18n.t('CANCEL')} 
