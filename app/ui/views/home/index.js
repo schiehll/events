@@ -98,7 +98,7 @@ class Home extends View {
             >add</FontIcon>
           </FloatingActionButton>
         </div>
-        <Tabs className={styles.tabs} tabItemContainerStyle={{width: parseInt(sizes.tabsWidth)}}>
+        <Tabs className={styles.tabs} tabItemContainerStyle={{width: sizes.tabsWidth}}>
           <Tab 
             label={i18n.t('TAB_LIST')} 
             onActive={this.handleTabs.bind(this, 'EVENT_LIST')}
@@ -117,11 +117,12 @@ class Home extends View {
           </Tab>
         </Tabs>
         <LeftNav 
-          width={sizes.formWidth}
+          width={parseInt(sizes.formWidth)}
           docked={false} 
           open={form.open}
         >
           <EventForm
+            {...this.props}
             onCloseFormClickHandler={this.toggleForm.bind(this)} 
           />
         </LeftNav>

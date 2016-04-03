@@ -1,7 +1,7 @@
 import styles from '+/assets/styles/components/event-info-window.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
-import {formatDate} from '+/utils/date'
+import {formatDateAndTime} from '+/utils/date'
 
 class EventInfoWindow extends DumbComponent {
   onRender() : Object {
@@ -9,7 +9,7 @@ class EventInfoWindow extends DumbComponent {
     return(
       <div>
         <h1 className={styles.name}>{name}</h1>
-        <h2 className={styles.date}>{formatDate(date)}</h2>
+        <h2 className={styles.date}>{formatDateAndTime(new Date(date))}</h2>
         <div>{address}</div>
       </div>
     )

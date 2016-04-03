@@ -1,13 +1,15 @@
 @import '../variables/colors';
 
 .title {
-  padding: 10px 15px;
+  composes: pipe-before from '../helpers/modifiers.pcss';
+  padding: 10px 0;
   float: left;
-  color: text;
+  color: darkPrimary;
   margin: 0;
   h2 {
     display: inline-block;
     margin: 0;
+    text-transform: uppercase;
   }
 }
 
@@ -18,4 +20,8 @@
   cursor: pointer;
   display: inline-block !important;
   position: absolute !important;
+}
+
+.fields {
+  padding: 10px;
 }

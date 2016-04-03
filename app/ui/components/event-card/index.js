@@ -2,7 +2,7 @@ import styles from '+/assets/styles/components/event-card.pcss'
 import colors from '+/assets/styles/variables/colors.pcss'
 import React from 'react'
 import DumbComponent from '+/core/DumbComponent'
-import {formatDate} from '+/utils/date'
+import {formatDateAndTime} from '+/utils/date'
 import i18n from '+/core/i18n'
 import {
   Card,
@@ -46,7 +46,7 @@ class EventCard extends DumbComponent {
           <CardTitle
             subtitle={
               <span>
-                <FontIcon className={`material-icons ${styles.date}`} color={colors.secondaryText}>today</FontIcon> {formatDate(event.date)}
+                <FontIcon className={`material-icons ${styles.date}`} color={colors.secondaryText}>today</FontIcon> {formatDateAndTime(new Date(event.date))}
                 <If condition={parseInt(user.id) === parseInt(auth.user.id)}>
                   <IconMenu 
                     targetOrigin={{vertical: 'bottom', horizontal: 'right'}} 
