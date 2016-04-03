@@ -2,6 +2,21 @@ const keys = [CONFIG.GOOGLE_MAPS_KEY, CONFIG.GOOGLE_MAPS_KEY_FALLBACK]
 
 export const getLatLng = (e : Object) : Promise => {
   const {event}  = e
+
+  const eventLat = localStorage.getItem(`${CONFIG.STORAGE_KEY}.${event.address}.lat`)
+  const eventLng = localStorage.getItem(`${CONFIG.STORAGE_KEY}.${event.address}.lng`)
+
+  if(eventLat !== null && eventLng !== null){
+    return Promise.resolve({
+      ...e,
+      event: {
+        ...event,
+        lat: eventLat,
+        lng: eventLng
+      }
+    })
+  }
+
   let key = localStorage.getItem(`${CONFIG.STORAGE_KEY}.maps`)
   if(!key){
     key = keys[0]
@@ -13,6 +28,9 @@ export const getLatLng = (e : Object) : Promise => {
       return response.json()
     }).then(response => {
       if(response.status === 'OK'){
+        const {lat, lng} = response.results[0].geometry.location
+        localStorage.setItem(`${CONFIG.STORAGE_KEY}.${event.address}.lat`, lat)
+        localStorage.setItem(`${CONFIG.STORAGE_KEY}.${event.address}.lng`, lng)
         resolve({
           ...e,
           event: {

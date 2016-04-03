@@ -28,14 +28,14 @@ class EventMap extends Component {
         return !e.event.lat || !e.event.lng
       })
 
-      if(!eventsWithoutPosition.length){
+      if(eventsWithoutPosition.length === 0){
         events.events.forEach((e, index) => {
           const {event} = e
           const marker = {
             event: event,
             position: {
-              lat: event.lat, 
-              lng: event.lng
+              lat: parseFloat(event.lat), 
+              lng: parseFloat(event.lng)
             }
           }
 
@@ -63,8 +63,8 @@ class EventMap extends Component {
 
     if(map.event.hasOwnProperty('id')){
       center = {
-        lat: map.event.lat,
-        lng: map.event.lng
+        lat: parseFloat(map.event.lat),
+        lng: parseFloat(map.event.lng)
       }
     }
 
