@@ -1,4 +1,4 @@
-import styles from '+/assets/styles/components/login.pcss'
+import styles from '+/assets/styles/components/login-form.pcss'
 import React from 'react'
 import Component from '+/core/Component'
 import i18n from '+/core/i18n'
@@ -21,18 +21,9 @@ class LoginForm extends Component {
     dispatch(actions.progress())
   }
 
-  setLang(lang : string) : void {
-    const {dispatch, actions} = this.props
-    dispatch(actions.setLang(lang))
-  }
-
   onRender() : Object {
     return(
-      <div className={styles.login}>
-        <div className={styles.lang}>
-          <span onClick={this.setLang.bind(this, 'en-US')} className={i18n.locale === 'en-US' ? styles.active : ''}>EN</span> 
-          <span onClick={this.setLang.bind(this, 'pt-BR')} className={i18n.locale === 'pt-BR' ? styles.active : ''}>BR</span>
-        </div>
+      <div>
         <div className={styles.logo}>
           <Logo />
         </div>
