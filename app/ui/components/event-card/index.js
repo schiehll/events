@@ -40,7 +40,7 @@ class EventCard extends DumbComponent {
             </For>
           } />
         } >
-          <img src={event.image} />
+          <img className={styles.image} src={event.image} />
         </CardMedia>
         <CardActions>
           <CardTitle

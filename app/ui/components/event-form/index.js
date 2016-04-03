@@ -27,7 +27,11 @@ class EventForm extends Component {
 
     if(this.validateData()){
       this.data.date = this.getDateAndTime()
-      console.log('can send', this.data);
+      const {dispatch, actions, onCloseFormClickHandler} = this.props
+      
+      dispatch(actions.saveEvent(this.data))
+      dispatch(actions.progress())
+      onCloseFormClickHandler()
     }
   }
 

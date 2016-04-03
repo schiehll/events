@@ -15,6 +15,7 @@ const constants : string[] = [
   'EVENTS_ERROR',
   'EVENTS_REQUEST',
   'EVENT_REMOVED',
+  'EVENT_SAVED',
   'SHOW_EVENT_INFO',
   'CONFIRMATION',
   'VALIDATION'
