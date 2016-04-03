@@ -71,7 +71,6 @@ const updateEvent = (data : Object) : Function => {
         })
       }
       else{
-        console.log('response', response);
         dispatch({
           type: EVENTS_ERROR,
           payload: response,

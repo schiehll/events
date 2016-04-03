@@ -69,8 +69,6 @@ const login = (user : Object) : Function => {
           loading: false
         }
       })
-
-      console.log(err);
     })
   }
 }
