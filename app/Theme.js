@@ -1,12 +1,8 @@
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator'
-import Spacing from 'material-ui/lib/styles/spacing'
-import zIndex from 'material-ui/lib/styles/zIndex'
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import colors from '+/assets/styles/variables/colors.pcss'
 
-export default {
-  spacing: Spacing,
-  zIndex: zIndex,
-  fontFamily: 'Roboto',
+export default getMuiTheme({
   palette: {
     primary1Color: colors.primary,
     primary2Color: colors.darkPrimary,
@@ -21,4 +17,4 @@ export default {
     disabledColor: ColorManipulator.fade(colors.text, 0.3),
     pickerHeaderColor: colors.darkPrimary
   }
-}
+})

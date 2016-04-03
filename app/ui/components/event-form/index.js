@@ -41,6 +41,7 @@ class EventForm extends Component {
   }
 
   validateData() : boolean {
+    const {form} = this.state
     const {name, address, image, tags} = this.data
     const {dispatch, actions} = this.props
     let fields = []
@@ -48,8 +49,8 @@ class EventForm extends Component {
     if(!name) fields.push('NAME')
     if(!address) fields.push('ADDRESS')
     if(!image) fields.push('IMAGE_URL')
-    if(!this.date) fields.push('DATE')
-    if(!this.time) fields.push('TIME')
+    if(!form.fields.date) fields.push('DATE')
+    if(!form.fields.time) fields.push('TIME')
 
     dispatch(actions.validate(fields))
 
@@ -61,8 +62,9 @@ class EventForm extends Component {
   }
 
   getDateAndTime() : string {
-    const [day, month, year] = this.date.split('/')
-    const [hour, minutes] = this.time.split(':')
+    const {fields} = this.state.form
+    const [day, month, year] = formatDate(new Date(fields.date)).split('/')
+    const [hour, minutes] = formatTime(new Date(fields.time)).split(':')
     const date = new Date(year, month - 1, day, hour, minutes)
 
     return date.toISOString()
@@ -74,11 +76,27 @@ class EventForm extends Component {
   }
 
   updateDate(instance, date) : void {
-    this.date = formatDate(date)
+    const {form} = this.state
+    const {dispatch, actions} = this.props
+    dispatch(actions.changeForm({
+      open: true,
+      fields: {
+        ...form.fields,
+        date: date
+      }
+    }))
   }
 
   updateTime(instance, time) : void {
-    this.time = formatTime(time)
+    const {form} = this.state
+    const {dispatch, actions} = this.props
+    dispatch(actions.changeForm({
+      open: true,
+      fields: {
+        ...form.fields,
+        time: time
+      }
+    }))
   }
 
   handleFormValue(e) : void {
@@ -95,8 +113,6 @@ class EventForm extends Component {
 
   onRender() : Object {
     const {validation, form} = this.state
-
-    console.log('form', form.fields);
 
     return(
       <div>
@@ -143,9 +159,9 @@ class EventForm extends Component {
             }
           /><br/>
           <DatePicker 
-            ref={i => this.dateRef = i}
+            value={form.fields.date || ''}
             hintText={i18n.t('DATE')}
-            wordings={{cancel: i18n.t('CANCEL')}} 
+            cancelLabel={i18n.t('CANCEL')} 
             minDate={new Date()}
             autoOk={true} 
             locale={i18n.locale} 
@@ -158,8 +174,9 @@ class EventForm extends Component {
             }
           />
           <TimePicker
-            ref={i => this.timeRef = i}
+            value={form.fields.time || ''}
             hintText={i18n.t('TIME')}
+            cancelLabel={i18n.t('CANCEL')} 
             format="24hr"
             autoOk={true}
             fullWidth={true}
@@ -177,7 +194,7 @@ class EventForm extends Component {
             fullWidth={true}
           /><br/>
           <RaisedButton 
-            primary={true} 
+            secondary={true} 
             label={i18n.t('SAVE')} 
             fullWidth={true}
             style={{marginTop: 10}}

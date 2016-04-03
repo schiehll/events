@@ -8,8 +8,7 @@ import middleware from '+/config/middleware'
 import Provider from '+/core/Provider'
 import Helmet from 'react-helmet'
 import Theme from '+/Theme'
-import ThemeManager from 'material-ui/lib/styles/theme-manager'
-import theme from 'material-ui/lib/styles/theme-decorator'
+import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider'
 
 const store = createStore(
   combineReducers({
@@ -19,7 +18,6 @@ const store = createStore(
   applyMiddleware(...middleware)
 )
 
-@theme(ThemeManager.getMuiTheme(Theme))
 class App extends React.Component {
   render() : Object {
     const {children, location} = this.props
@@ -28,14 +26,16 @@ class App extends React.Component {
       className = styles.login
     }
     return(
-      <div className={className}>
-        <Helmet
-        title={children.type.title || 'App'}
-        titleTemplate={`${CONFIG.NAME} | %s`} />
-        <Provider store={store} actions={actions}>
-          {children}
-        </Provider>
-      </div>
+      <MuiThemeProvider muiTheme={Theme}>
+        <div className={className}>
+          <Helmet
+          title={children.type.title || 'App'}
+          titleTemplate={`${CONFIG.NAME} | %s`} />
+          <Provider store={store} actions={actions}>
+            {children}
+          </Provider>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

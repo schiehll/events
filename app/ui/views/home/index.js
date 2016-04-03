@@ -47,11 +47,17 @@ class Home extends View {
     const {dispatch, actions} = this.props
     let tags = ''
     event.tags.forEach(tag => tags += `#${tag.name} `)
+
+    let date = new Date(event.event.date)
+    let time = new Date(event.event.date)
+    time.setDate(new Date().getDate())
     dispatch(actions.changeForm({
       open: true,
       fields: {
         ...event.event,
-        tags
+        tags,
+        date,
+        time
       }
     }))
   }
@@ -105,7 +111,7 @@ class Home extends View {
         <h2 className={styles.title}>{i18n.t(tab)}</h2>
         <h3 className={styles.subtitle}>{this.showSubtitle.bind(this)()}</h3>
         <div className={styles.fab} onClick={this.toggleForm.bind(this)}>
-          <FloatingActionButton>
+          <FloatingActionButton secondary={true}>
             <FontIcon
               color={colors.alternateText} 
               className={`material-icons`}

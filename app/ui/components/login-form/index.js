@@ -14,8 +14,8 @@ class LoginForm extends Component {
   login() : void {
     const {dispatch, actions} = this.props
     dispatch(actions.login({
-      email: this.userEmail.refs.input.value,
-      password: this.userPassword.refs.input.value
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
     }))
 
     dispatch(actions.progress())
@@ -31,17 +31,19 @@ class LoginForm extends Component {
           <div className={styles.title}>{i18n.t('LOGIN')}</div>
           <div className={styles.fields}>
             <TextField
+              id="email"
               type="email"
               ref={i => this.userEmail = i}
               hintText={i18n.t('EMAIL')}
             /><br/>
             <TextField
+              id="password"
               type="password"
               ref={i => this.userPassword = i}
               hintText={i18n.t('PASSWORD')}
             /><br/>
             <RaisedButton 
-              primary={true} 
+              secondary={true} 
               label={i18n.t('ENTER')} 
               onClick={this.login.bind(this)} 
               fullWidth={true}
