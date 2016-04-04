@@ -2,6 +2,9 @@
 
 > An events management single page web app
 
+[![travis build](https://img.shields.io/travis/schiehll/events.svg?style=flat-square)](https://travis-ci.org/schiehll/events)
+[![Coveralls branch](https://img.shields.io/coveralls/schiehll/events/master.svg?style=flat-square)](https://coveralls.io/github/schiehll/events?branch=master)
+
 ## tecnologies
 
 - Webpack
