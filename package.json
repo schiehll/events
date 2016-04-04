@@ -14,7 +14,7 @@
     "build:prod": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack.prod.babel.js",
     "build:local": "npm run clean && cross-env NODE_ENV=local webpack --config webpack.local.babel.js",
     "build": "npm run build:local",
-    "postinstall": "npm run build:prod",
+    "heroku-postbuild": "npm run build:prod",
     "local": "npm run build && cross-env NODE_ENV=local babel-node server.local.js",
     "start": "cross-env NODE_ENV=production nodemon server.js --exec babel-node"
   },
